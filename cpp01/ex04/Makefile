@@ -6,14 +6,14 @@
 #    By: gichlee <gichlee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/27 20:43:56 by gichlee           #+#    #+#              #
-#    Updated: 2023/09/03 15:50:53 by gichlee          ###   ########.fr        #
+#    Updated: 2023/09/25 15:30:08 by gichlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= sed_for_losers
 SRCS		=	main.cpp
 OBJS		= $(SRCS:%.cpp=%.o)
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 RM			+= -f
 
 %.o: %.cpp
@@ -34,4 +34,4 @@ fclean:
 			$(RM) $(NAME)
 
 re:	fclean
-	$(MAKE) all%
+	$(MAKE) all
