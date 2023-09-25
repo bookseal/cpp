@@ -1,0 +1,4 @@
+hello world
+this is the infile.txt
+test
+hello test
