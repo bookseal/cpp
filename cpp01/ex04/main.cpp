@@ -5,7 +5,7 @@ int main(void) {
 	std::string line;
 	std::string total_line;
 	std::string s1 = "test";
-	std::string s2 = "TEST2";
+	std::string s2 = "TEST222";
 	
 	std::ifstream file(filename);
 	if (!file.is_open()) {
@@ -26,6 +26,7 @@ int main(void) {
 		total_line += "\n";
 	}
 	file.close();
-	std::cout << total_line << std::endl;
+	std::ofstream outfile(filename + ".replace");
+	outfile << total_line;
 	return 0;
 }
