@@ -12,12 +12,13 @@
 
 NAME		= unnecessary_violence
 SRCS		=	main.cpp \
-					Weapon.cpp \
-					HumanA.cpp \
-					HumanB.cpp \
+				Weapon.cpp \
+				HumanA.cpp \
+				HumanB.cpp 
 OBJS		= $(SRCS:%.cpp=%.o)
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			+= -f
+
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 

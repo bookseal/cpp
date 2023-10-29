@@ -17,7 +17,7 @@ SRCS		=	main.cpp \
 				randomChump.cpp 
 
 OBJS		= $(SRCS:%.cpp=%.o)
-#CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			+= -f
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@

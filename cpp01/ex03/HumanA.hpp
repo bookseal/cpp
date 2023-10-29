@@ -1,11 +1,13 @@
-#include "Weapon.cpp"
+#include "Weapon.hpp"
+#include <iostream>
 
 class HumanA {
 public:
-	HumanA();
+	HumanA(std::string name, Weapon *weapon);
 	~HumanA();
 	void	attack(void);
+	void	setWeapon(Weapon *weapon);
 private:
-	Weapon weapon;
 	std::string name;
-}
+	Weapon *weapon;
+};
