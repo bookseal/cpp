@@ -25,8 +25,7 @@ int main(void) {
 			total_line += line;
 		total_line += "\n";
 	}
-	file.close();
-	std::ofstream outfile(filename + ".replace");
+	file.close();mplace");
 	outfile << total_line;
 	return 0;
 }
