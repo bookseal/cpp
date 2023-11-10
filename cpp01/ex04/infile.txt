@@ -1,4 +1,4 @@
 hello world
 this is the infile.txt
-test
+test test
 hello test
