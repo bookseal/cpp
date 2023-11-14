@@ -10,3 +10,5 @@ class Harl {
 	public:
 	void complain(std::string level);
 };
+
+typedef void (Harl::*HarlFunction)();

@@ -20,7 +20,6 @@ void Harl::error(void)
 	std::cout << "[ERROR] This is an error message." << std::endl;
 }
 
-typedef void (Harl::*HarlFunction)();
 
 void Harl::complain(std::string level)
 {
