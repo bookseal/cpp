@@ -6,7 +6,7 @@
 #    By: gichlee <gichlee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/27 20:43:56 by gichlee           #+#    #+#              #
-#    Updated: 2023/09/03 15:50:53 by gichlee          ###   ########.fr        #
+#    Updated: 2023/11/18 16:02:11 by gichlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,4 +34,4 @@ fclean:
 			$(RM) $(NAME)
 
 re:	fclean
-	$(MAKE) all%
+	$(MAKE) all

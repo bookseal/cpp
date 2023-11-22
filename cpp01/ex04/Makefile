@@ -6,12 +6,12 @@
 #    By: gichlee <gichlee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/27 20:43:56 by gichlee           #+#    #+#              #
-#    Updated: 2023/09/25 15:30:08 by gichlee          ###   ########.fr        #
+#    Updated: 2023/11/18 16:12:21 by gichlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= sed_for_losers
-SRCS		=	main.cpp
+SRCS		= main.cpp
 OBJS		= $(SRCS:%.cpp=%.o)
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 RM			+= -f

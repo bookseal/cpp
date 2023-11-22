@@ -1,3 +1,6 @@
+#ifndef HUMANA_HPP
+#define HUMANA_HPP
+
 #include "Weapon.hpp"
 #include <iostream>
 
@@ -11,3 +14,5 @@ private:
 	std::string name;
 	Weapon *weapon;
 };
+
+#endif

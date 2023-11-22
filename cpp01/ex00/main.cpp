@@ -1,16 +1,19 @@
 #include "Zombie.hpp"
-#include <iostream>
-#include <string>
 
-Zombie* newZombie(std::string name);
-void randomChump(std::string name);
+void	leaks(void)
+{
+	system("leaks brainz");
+}
 
-int main(){
-	Zombie* zombie = newZombie("hi");
+int main()
+{
+	atexit(leaks);
+
+	Zombie* zombie = newZombie("Zombie 00");
 	zombie->announce();
 	delete zombie;
 
-	randomChump("hello");
+	randomChump("Zombie 01");
 	
 	return (0);
 }

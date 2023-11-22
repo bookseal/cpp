@@ -1,10 +1,13 @@
 #include "Zombie.hpp"
-#include <iostream>
-#include <string>
 
-Zombie* zombieHorde(int N, std::string name);
+void	leaks(void)
+{
+	system("leaks moar_brainz");
+}
 
 int main(){
+	atexit(leaks);
+
 	int n = 5;
 	Zombie* zombies = zombieHorde(n, "ZOMBIE");
 	Zombie* temp = zombies;
@@ -15,6 +18,5 @@ int main(){
 	}
 	
 	delete[] zombies;
-
 	return (0);
 }
