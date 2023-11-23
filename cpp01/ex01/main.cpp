@@ -16,6 +16,7 @@ int main(){
 		temp->announce();
 		temp++;
 	}
+	std::cout << std::endl;
 	
 	delete[] zombies;
 	return (0);

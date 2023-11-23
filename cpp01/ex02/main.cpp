@@ -24,5 +24,14 @@ int main(void){
 	// The value pointed to by stringREF.
 	std::cout << stringREF << std::endl;
 	
+	std::cout << std::endl;
+	
+	str = "MODIFIED";
+	// The value of the string variable.
+	std::cout << str << std::endl;
+	// The value pointed to by stringPTR.
+	std::cout << *stringPTR << std::endl;
+	// The value pointed to by stringREF.
+	std::cout << stringREF << std::endl;
 	return (0);
 }

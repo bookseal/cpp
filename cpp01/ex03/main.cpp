@@ -2,17 +2,10 @@
 #include "HumanA.hpp"
 #include "HumanB.hpp"
 
-void	leaks(void)
-{
-	system("leaks unnecessary_violence");
-}
-
 int main(){
-	atexit(leaks);
-
 	{
 		Weapon  club = Weapon("crude spiked club");
-		HumanA bob("Bob", &club);
+		HumanA bob("Bob", club);
 		bob.attack();
 		club.setType("some other type of club");
 		bob.attack();
@@ -23,12 +16,21 @@ int main(){
 	{
 		Weapon  club = Weapon("crude spiked club");
 		HumanB jim("Jim");
-		// FIXME: This line is commented out because it causes a segfault.
-		// jim.setWeapon(&club);
+		jim.setWeapon(club);
 		jim.attack();
 		club.setType("some other type of club");
 		jim.attack();
 	}
 	
+	std::cout << std::endl;
+
+	{
+		Weapon  club = Weapon("crude spiked club");
+		HumanB jesus("Jusus");
+		// jesus.setWeapon(club);
+		jesus.attack();
+		club.setType("some other type of club");
+		jesus.attack();
+	}
 	return 0;
 }
