@@ -15,11 +15,16 @@ Fixed::Fixed(const int value)
 Fixed::Fixed(const float value)
 {
 	std::cout << "Float constructor called" << std::endl;
-	std::cout << std::endl << 💬
-	std::bitset<32> binary = value;
-	std::cout << binary << std::endl;
-	int value_hex = value;
-	std::cout << std::setfill('0') << std::setw(8) << std::hex << value_hex << std::endl;
+	{
+		std::cout << "💬 print value with various base 💬" << std::endl;
+		std::cout << "value represented in decimal: " << value << std::endl;
+		std::bitset<32> binary = value;
+		std::cout << "value represented in binary: " << binary << std::endl;
+		int value_hex = value;
+		std::cout << "value represented in hexadecimal: " << std::setfill('0') << std::setw(8) << std::hex << value_hex << std::endl;
+	}
+	int scaleFactor = 1 << this->_fractionalBits;
+	
 }
 
 Fixed::Fixed(const Fixed &src)
