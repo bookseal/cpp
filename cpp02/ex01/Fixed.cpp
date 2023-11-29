@@ -16,15 +16,44 @@ Fixed::Fixed(const float value)
 {
 	std::cout << "Float constructor called" << std::endl;
 	{
-		std::cout << "💬 print value with various base 💬" << std::endl;
-		std::cout << "value represented in decimal: " << value << std::endl;
+		std::cout << "💬 input value with various base 💬" << std::endl;
+		std::cout << std::dec << "in decimal: " << value << std::endl;
 		std::bitset<32> binary = value;
-		std::cout << "value represented in binary: " << binary << std::endl;
+		std::cout << "in binary: " << binary << std::endl;
 		int value_hex = value;
-		std::cout << "value represented in hexadecimal: " << std::setfill('0') << std::setw(8) << std::hex << value_hex << std::endl;
+		std::cout << "in hexadecimal: " << std::setfill('0') << std::setw(8) << std::hex << value_hex << std::endl;
 	}
-	int scaleFactor = 1 << this->_fractionalBits;
-	
+	float scaleFactor = 1 << this->_fractionalBits;
+	{
+		std::cout << std::endl;
+		std::cout << "*️⃣  scaleFactor with various base *️⃣" << std::endl;
+		std::cout << std::dec << "in decimal: " << scaleFactor << std::endl;
+		std::bitset<32> binary = scaleFactor;
+		std::cout << "in binary: " << binary << std::endl;
+		int value_hex = scaleFactor;
+		std::cout << "in hexadecimal: " << std::setfill('0') << std::setw(8) << std::hex << value_hex << std::endl;
+	}
+	float value_scaled = value * scaleFactor;
+	{
+		std::cout << std::endl;
+		std::cout << "🦍 value_scaled with various base 🦍" << std::endl;
+		std::cout << std::dec << "in decimal: " << value_scaled << std::endl;
+		std::bitset<32> binary = value_scaled;
+		std::cout << "in binary: " << binary << std::endl;
+		int value_hex = value_scaled;
+		std::cout << "in hexadecimal: " << std::setfill('0') << std::setw(8) << std::hex << value_hex << std::endl;
+	}
+	this->_fixedPointValue = roundf(value_scaled);
+	{
+		std::cout << std::endl;
+		std::cout << "🐳 _fixedPointValue with various base 🐳" << std::endl;
+		std::cout << std::dec << "in decimal: " << _fixedPointValue << std::endl;
+		std::bitset<32> binary = _fixedPointValue;
+		std::cout << "in binary: " << binary << std::endl;
+		int value_hex = _fixedPointValue;
+		std::cout << "in hexadecimal: " << std::setfill('0') << std::setw(8) << std::hex << value_hex << std::endl;
+	}
+	std::cout << std::endl;
 }
 
 Fixed::Fixed(const Fixed &src)
@@ -34,11 +63,10 @@ Fixed::Fixed(const Fixed &src)
 	*this = src;
 }
 
-Fixed &Fixed::operator=(const Fixed &rhs)
+
+float Fixed::toFloat(void) const
 {
-	std::cout << "Copy Assignment operator called" << std::endl;
-	this->_fixedPointValue = rhs.getRawBits();
-	return (*this);
+	return ((float)1.0f);
 }
 
 int Fixed::getRawBits(void) const
@@ -55,4 +83,11 @@ void Fixed::setRawBits(int const raw)
 Fixed::~Fixed(void)
 {
 	std::cout << "Destructor called" << std::endl;
+}
+
+Fixed &Fixed::operator=(const Fixed &rhs)
+{
+	std::cout << "Copy Assignment operator called" << std::endl;
+	this->_fixedPointValue = rhs.getRawBits();
+	return (*this);
 }
