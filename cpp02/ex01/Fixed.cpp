@@ -18,7 +18,8 @@ Fixed::Fixed(const float value)
 	{
 		std::cout << "💬 input value with various base 💬" << std::endl;
 		std::cout << std::dec << "in decimal: " << value << std::endl;
-		std::bitset<32> binary = value;
+		std::bitset<32> binary(*reinterpret_cast<const unsigned int*>(&value));
+		// std::bitset<32> binary = value;
 		std::cout << "in binary: " << binary << std::endl;
 		int value_hex = value;
 		std::cout << "in hexadecimal: " << std::setfill('0') << std::setw(8) << std::hex << value_hex << std::endl;
@@ -91,3 +92,13 @@ Fixed &Fixed::operator=(const Fixed &rhs)
 	this->_fixedPointValue = rhs.getRawBits();
 	return (*this);
 }
+
+// An overload of the insertion («) operator 
+// that inserts a floating-point representation of the fixed-point number 
+// into the output stream object passed as parameter.
+// Fixed &Fixed::operator<<(const Fixed &rhs)
+// {
+// 	std::cout << "Copy Assignment operator called" << std::endl;
+
+// 	return (*this);
+// }

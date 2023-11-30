@@ -20,7 +20,10 @@ class Fixed
 		int toInt(void) const;
 
 	private:
+		// An integer to store the fixed-point number value.
 		int _fixedPointValue;
+		// A static constant integer to store the number of fractional bits. 
+		// Its value will always be the integer literal 8
 		static const int _fractionalBits = 8;
 };
 
