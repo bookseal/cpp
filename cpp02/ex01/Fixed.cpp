@@ -67,7 +67,12 @@ Fixed::Fixed(const Fixed &src)
 
 float Fixed::toFloat(void) const
 {
-	return ((float)1.0f);
+	return ((float)this->_fixedPointValue / (float)(1 << this->_fractionalBits));
+}
+
+int Fixed::toInt(void) const
+{
+	return (this->_fixedPointValue >> this->_fractionalBits);
 }
 
 int Fixed::getRawBits(void) const
@@ -96,9 +101,8 @@ Fixed &Fixed::operator=(const Fixed &rhs)
 // An overload of the insertion («) operator 
 // that inserts a floating-point representation of the fixed-point number 
 // into the output stream object passed as parameter.
-// Fixed &Fixed::operator<<(const Fixed &rhs)
-// {
-// 	std::cout << "Copy Assignment operator called" << std::endl;
-
-// 	return (*this);
-// }
+std::ostream &operator<<(std::ostream &lhs, const Fixed &rhs)
+{
+    lhs << std::dec << rhs.toFloat();
+    return lhs;
+}

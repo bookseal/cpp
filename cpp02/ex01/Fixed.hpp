@@ -11,14 +11,13 @@ class Fixed
 		Fixed(const int value);
 		Fixed(const float value);
 		Fixed(const Fixed &src);
-		Fixed &operator=(const Fixed &rhs);
-		Fixed &operator<<(const Fixed &rhs);
 		~Fixed(void);
 		int getRawBits(void) const;
 		void setRawBits(int const raw);
 		float toFloat(void) const;
 		int toInt(void) const;
-
+		Fixed &operator=(const Fixed &rhs);
+	
 	private:
 		// An integer to store the fixed-point number value.
 		int _fixedPointValue;
@@ -26,5 +25,7 @@ class Fixed
 		// Its value will always be the integer literal 8
 		static const int _fractionalBits = 8;
 };
+
+std::ostream &operator<<(std::ostream &lhs, const Fixed &rhs);
 
 #endif
