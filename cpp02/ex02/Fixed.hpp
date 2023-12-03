@@ -17,29 +17,32 @@ class Fixed
 		float toFloat(void) const;
 		int toInt(void) const;
 		Fixed &operator=(const Fixed &rhs);
-		// TODO: 6 comparison operators
+		
+		// 6 comparison operators
 		bool operator>(const Fixed &rhs) const;
 		bool operator<(const Fixed &rhs) const;
 		bool operator>=(const Fixed &rhs) const;
 		bool operator<=(const Fixed &rhs) const;
 		bool operator==(const Fixed &rhs) const;
 		bool operator!=(const Fixed &rhs) const;
-		// TODO: 4 arithmetic operators
+		// 4 arithmetic operators
 		Fixed operator+(const Fixed &rhs) const;
 		Fixed operator-(const Fixed &rhs) const;
 		Fixed operator*(const Fixed &rhs) const;
 		Fixed operator/(const Fixed &rhs) const;
-		// TODO: 4 increment/decrement operators
+		// 4 increment/decrement operators
 		Fixed &operator++(void);
 		Fixed operator++(int);
 		Fixed &operator--(void);
 		Fixed operator--(int);
 
-		// TODO: min function with two parameters
+		// min function with two parameters
 		static Fixed &min(Fixed &a, Fixed &b);
-		static Fixed &min(const Fixed &a, const Fixed &b);
+		// A static member function min that takes as parameters two references to constant fixed-point numbers, and returns a reference to the smallest one.
+		static const Fixed &min(const Fixed &a, const Fixed &b);
 		static Fixed &max(Fixed &a, Fixed &b);
-		static Fixed &max(const Fixed &a, const Fixed &b);
+		static const Fixed &max(const Fixed &a, const Fixed &b);
+	
 	private:
 		// An integer to store the fixed-point number value.
 		int _fixedPointValue;
