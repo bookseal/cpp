@@ -2,18 +2,18 @@
 
 ClapTrap::ClapTrap(void)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "👏 Default constructor called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name): _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0)
 {
-	std::cout << "Name constructor called" << std::endl;
+	typeLikeHuman("👏 Name constructor called", 10000);
 	this->_name = name;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &src)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "👏 Copy constructor called" << std::endl;
 	*this = src;
 }
 
@@ -28,55 +28,72 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &rhs)
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "👏 Destructor called" << std::endl;
 }
 
 void ClapTrap::attack(std::string const & target)
 {
-	if (this->_energyPoints == 0)
-	{
-		std::cout << "ClapTrap " << this->_name << " has no energy left to attack!" << std::endl;
-		return ;
-	}
 	if (this->_hitPoints == 0)
 	{
-		std::cout << "ClapTrap " << this->_name << " has no hit points left to attack!" << std::endl;
+		displayDead();
 		return ;
 	}
-	std::cout << "ClapTrap " << this->_name << " attacks " << target << ", cuasing " << this->_attackDamage << " points of damage!" << std::endl;
+	if (this->_energyPoints == 0)
+	{
+		typeLikeHuman("👏 ClapTrap " + this->_name + " has no energy left to attack!", 10000);
+		return ;
+	}
+	typeLikeHuman("👏 ClapTrap " + this->_name + " 🏹 attacks " + target + ", cuasing " + std::to_string(this->_attackDamage) + " points of damage!", 10000);
 	this->_energyPoints -= 1;
+	if (this->_energyPoints < 0)
+		this->_energyPoints = 0;
 }
 
 void ClapTrap::takeDamage(unsigned int amount)
 {
 	if (this->_hitPoints == 0)
 	{
-		std::cout << "ClapTrap " << this->_name << " has no hit points left to take damage!" << std::endl;
+		typeLikeHuman("👏 ClapTrap " + this->_name + " ☠️  is dead!", 10000);
 		return ;
 	}
-	std::cout << "ClapTrap " << this->_name << " takes " << amount << " points of damage!" << std::endl;
+	typeLikeHuman("👏 ClapTrap " + this->_name + " 🤕 takes " + std::to_string(amount) + " points of damage!", 10000);
 	this->_hitPoints -= amount;
+	if (this->_hitPoints < 0)
+		this->_hitPoints = 0;
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (this->_energyPoints == 0)
 	{
-		std::cout << "ClapTrap " << this->_name << " has no energy left to be repaired!" << std::endl;
+		typeLikeHuman("👏 ClapTrap " + this->_name + " has no energy left to be repaired!", 10000);
 		return ;
 	}
 	if (this->_hitPoints == 0)
 	{
-		std::cout << "ClapTrap " << this->_name << " has no hit points left to be repaired!" << std::endl;
+		displayDead();
+		std::cout << "👏 ClapTrap " << this->_name << " ☠️  is dead!" << std::endl;
 		return ;
 	}
-	std::cout << "ClapTrap " << this->_name << " is repaired for " << amount << " points!" << std::endl;
+	typeLikeHuman("👏 ClapTrap " + this->_name + " 🛠️ is repaired for " + std::to_string(amount) + " points!", 10000);
 	this->_hitPoints += amount;
 	this->_energyPoints -= 1;
 }
 
 void ClapTrap::displayAttributes(void)
 {
-	// TODO: with various emoticons of the test based on the value of the attribute
-	std::cout << "ClapTrap " << this->_name << " has " << this->_hitPoints << " hit points, " << this->_energyPoints << " energy points and " << this->_attackDamage << " attack damage." << std::endl;
+	typeLikeHuman("║ 👏 ClapTrap " + this->_name + " has " + std::to_string(this->_hitPoints) + " hit points, " + std::to_string(this->_energyPoints) + " energy points and " + std::to_string(this->_attackDamage) + " attack damage. ║ ", 10000);
+} 
+
+void ClapTrap::displayDead(void)
+{
+	typeLikeHuman("👏 ClapTrap " + this->_name + " ☠️  is dead!", 10000);
+}
+
+void ClapTrap::typeLikeHuman(const std::string& sentence, unsigned int microseconds) {
+	for (size_t i = 0; i < sentence.length(); ++i) {
+		std::cout << sentence[i] << std::flush; // Print character without newline and flush the stream
+		usleep(microseconds); // Pause for the specified microseconds
+	}
+	std::cout << std::endl; // Move to the next line after the sentence is complete
 }
