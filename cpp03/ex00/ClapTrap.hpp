@@ -2,6 +2,8 @@
 # define ClapTrap_HPP
 #include <iostream>
 #include <unistd.h>
+#include <sstream>
+#include <string> 
 
 class ClapTrap 
 {
@@ -16,8 +18,9 @@ class ClapTrap
 		void beRepaired(unsigned int amount);
 		void displayDead(void);
 		void displayAttributes(void);
-		void typeLikeHuman(const std::string& sentence, unsigned int microseconds);
 		int getAttackDamage(void) const;
+		void typeLikeHuman(const std::string& sentence, unsigned int microseconds);
+		std::string intToString(int value);
 
 	private:
 		std::string _name;

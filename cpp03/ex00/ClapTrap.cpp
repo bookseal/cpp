@@ -43,7 +43,7 @@ void ClapTrap::attack(std::string const & target)
 		typeLikeHuman("👏 ClapTrap " + this->_name + " has no energy left to attack!", 10000);
 		return ;
 	}
-	typeLikeHuman("👏 ClapTrap " + this->_name + " 🏹 attacks " + target + ", cuasing " + std::to_string(this->_attackDamage) + " points of damage!", 10000);
+	typeLikeHuman("👏 ClapTrap " + this->_name + " 🏹 attacks " + target + ", cuasing " + intToString(this->_attackDamage) + " points of damage!", 10000);
 	this->_energyPoints -= 1;
 	if (this->_energyPoints < 0)
 		this->_energyPoints = 0;
@@ -56,7 +56,7 @@ void ClapTrap::takeDamage(unsigned int amount)
 		displayDead();
 		return ;
 	}
-	typeLikeHuman("🤖 ****Trap " + this->_name + " 🤕 takes " + std::to_string(amount) + " points of damage!", 10000);
+	typeLikeHuman("🤖 ****Trap " + this->_name + " 🤕 takes " + intToString(amount) + " points of damage!", 10000);
 	this->_hitPoints -= amount;
 	if (this->_hitPoints < 0)
 		this->_hitPoints = 0;
@@ -75,7 +75,7 @@ void ClapTrap::beRepaired(unsigned int amount)
 		std::cout << "🤖 ****Trap " << this->_name << " ☠️  is dead!" << std::endl;
 		return ;
 	}
-	typeLikeHuman("🤖 ****Trap " + this->_name + " 🛠️ is repaired for " + std::to_string(amount) + " points!", 10000);
+	typeLikeHuman("🤖 ****Trap " + this->_name + " 🛠️ is repaired for " + intToString(amount) + " points!", 10000);
 	this->_hitPoints += amount;
 	this->_energyPoints -= 1;
 }
@@ -87,7 +87,14 @@ void ClapTrap::displayDead(void)
 
 void ClapTrap::displayAttributes(void)
 {
-	typeLikeHuman("║ 👏 ClapTrap " + this->_name + " has " + std::to_string(this->_hitPoints) + " hit points, " + std::to_string(this->_energyPoints) + " energy points and " + std::to_string(this->_attackDamage) + " attack damage. ║ ", 10000);
+	typeLikeHuman("║ 👏 ClapTrap " + this->_name + " has " + intToString(this->_hitPoints) + " hit points, " + intToString(this->_energyPoints) + " energy points and " + intToString(this->_attackDamage) + " attack damage. ║ ", 10000);
+}
+
+std::string ClapTrap::intToString(int value)
+{
+	std::ostringstream convert;
+	convert << value;
+	return (convert.str());
 }
 
 void ClapTrap::typeLikeHuman(const std::string& sentence, unsigned int microseconds) {
