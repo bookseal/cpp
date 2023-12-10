@@ -13,7 +13,7 @@ FragTrap::FragTrap(std::string name): ClapTrap(name)
 	typeLikeHuman("🎯 Name constructor called", 10000);
 }
 
-FragTrap::FragTrap(const FragTrap &src)
+FragTrap::FragTrap(const FragTrap &src): ClapTrap(src)
 {
 	std::cout << "🎯 Copy constructor called" << std::endl;
 	*this = src;
@@ -45,7 +45,7 @@ void FragTrap::attack(std::string const & target)
 		typeLikeHuman("🎯 FragTrap " + this->_name + " has no energy left to attack!", 10000);
 		return ;
 	}
-	typeLikeHuman("🎯 FragTrap " + this->_name + " 🏹 attacks " + target + ", cuasing " + std::to_string(this->_attackDamage) + " points of damage!", 10000);
+	typeLikeHuman("🎯 FragTrap " + this->_name + " 🏹 attacks " + target + ", cuasing " + intToString(this->_attackDamage) + " points of damage!", 10000);
 	this->_energyPoints -= 1;
 	if (this->_energyPoints < 0)
 		this->_energyPoints = 0;
@@ -58,7 +58,7 @@ void FragTrap::displayDead(void)
 
 void FragTrap::displayAttributes(void)
 {
-	typeLikeHuman("║ 🎯 FragTrap " + this->_name + " has " + std::to_string(this->_hitPoints) + " hit points, " + std::to_string(this->_energyPoints) + " energy points and " + std::to_string(this->_attackDamage) + " attack damage. ║ ", 10000);
+	typeLikeHuman("║ 🎯 FragTrap " + this->_name + " has " + intToString(this->_hitPoints) + " hit points, " + intToString(this->_energyPoints) + " energy points and " + intToString(this->_attackDamage) + " attack damage. ║ ", 10000);
 } 
 
 void FragTrap::highFivesGuys(void)
