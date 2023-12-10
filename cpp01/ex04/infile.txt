@@ -1,5 +1,0 @@
-hello world
-this is the infile.txt
-test test
-hello test
-abc abc abc
