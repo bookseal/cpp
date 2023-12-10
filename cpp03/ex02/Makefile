@@ -6,14 +6,15 @@
 #    By: leegichan <leegichan@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/27 20:43:56 by gichlee           #+#    #+#              #
-#    Updated: 2023/12/10 16:11:31 by leegichan        ###   ########.fr        #
+#    Updated: 2023/12/10 17:27:01 by leegichan        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= a.out
 SRCS		=	main.cpp \
 				ClapTrap.cpp \
-				ScavTrap.cpp 
+				ScavTrap.cpp \
+				FragTrap.cpp \
 
 OBJS		= $(SRCS:%.cpp=%.o)
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98

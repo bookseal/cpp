@@ -12,10 +12,10 @@ void typeLikeHuman(const std::string& sentence, unsigned int microseconds) {
 
 void displayBothAttributes(ClapTrap &a, ClapTrap &b)
 {
-	std::cout << "╔════════════════════════════════REPORT══════════════════════════════════╗" << std::endl;
+	std::cout << "╔════════════════════════════════REPORT═══════════════════════════════════╗" << std::endl;
 	a.displayAttributes();
 	b.displayAttributes();
-	std::cout << "╚════════════════════════════════════════════════════════════════════════╝" << std::endl;
+	std::cout << "╚═════════════════════════════════════════════════════════════════════════╝" << std::endl;
 	std::cout << std::endl;
 }
 
@@ -33,13 +33,13 @@ int main( void )
 	typeLikeHuman("Case " + std::to_string(idx++) + " (Press enter...)", 10000);
 	std::cin.get();
 	a.attack("B");
-	b.takeDamage(2);
+	b.takeDamage(a.getAttackDamage());
 	displayBothAttributes(a, b);
 	
 	typeLikeHuman("Case " + std::to_string(idx++) + " (Press enter...)", 10000);
 	std::cin.get();
 	b.attack("A");
-	a.takeDamage(2);
+	a.takeDamage(b.getAttackDamage());
 	displayBothAttributes(a, b);
 	
 	typeLikeHuman("Case " + std::to_string(idx++) + " (Press enter...)", 10000);
@@ -48,18 +48,17 @@ int main( void )
 	b.beRepaired(2);
 	displayBothAttributes(a, b);
 
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		typeLikeHuman("Case " + std::to_string(idx++) + " (Press enter...)", 10000);
 		std::cin.get();
-		a.attack("B");
-		b.takeDamage(6);
+		a.takeDamage(6);
 		displayBothAttributes(a, b);
 	}
 
 	typeLikeHuman("Case " + std::to_string(idx++) + " (Press enter...)", 10000);
 	std::cin.get();
-	b.attack("A");
+	a.attack("A");
 	displayBothAttributes(a, b);
 
 	typeLikeHuman("Case " + std::to_string(idx++), 10000);

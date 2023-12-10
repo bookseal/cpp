@@ -53,10 +53,10 @@ void ClapTrap::takeDamage(unsigned int amount)
 {
 	if (this->_hitPoints == 0)
 	{
-		typeLikeHuman("👏 ClapTrap " + this->_name + " ☠️  is dead!", 10000);
+		displayDead();
 		return ;
 	}
-	typeLikeHuman("👏 ClapTrap " + this->_name + " 🤕 takes " + std::to_string(amount) + " points of damage!", 10000);
+	typeLikeHuman("🤖 ****Trap " + this->_name + " 🤕 takes " + std::to_string(amount) + " points of damage!", 10000);
 	this->_hitPoints -= amount;
 	if (this->_hitPoints < 0)
 		this->_hitPoints = 0;
@@ -66,28 +66,28 @@ void ClapTrap::beRepaired(unsigned int amount)
 {
 	if (this->_energyPoints == 0)
 	{
-		typeLikeHuman("👏 ClapTrap " + this->_name + " has no energy left to be repaired!", 10000);
+		typeLikeHuman("🤖 ****Trap " + this->_name + " has no energy left to be repaired!", 10000);
 		return ;
 	}
 	if (this->_hitPoints == 0)
 	{
 		displayDead();
-		std::cout << "👏 ClapTrap " << this->_name << " ☠️  is dead!" << std::endl;
+		std::cout << "🤖 ****Trap " << this->_name << " ☠️  is dead!" << std::endl;
 		return ;
 	}
-	typeLikeHuman("👏 ClapTrap " + this->_name + " 🛠️ is repaired for " + std::to_string(amount) + " points!", 10000);
+	typeLikeHuman("🤖 ****Trap " + this->_name + " 🛠️ is repaired for " + std::to_string(amount) + " points!", 10000);
 	this->_hitPoints += amount;
 	this->_energyPoints -= 1;
+}
+
+void ClapTrap::displayDead(void)
+{
+	typeLikeHuman("👏 ClapTrap " + this->_name + " ☠️  is dead!", 10000);
 }
 
 void ClapTrap::displayAttributes(void)
 {
 	typeLikeHuman("║ 👏 ClapTrap " + this->_name + " has " + std::to_string(this->_hitPoints) + " hit points, " + std::to_string(this->_energyPoints) + " energy points and " + std::to_string(this->_attackDamage) + " attack damage. ║ ", 10000);
-} 
-
-void ClapTrap::displayDead(void)
-{
-	typeLikeHuman("👏 ClapTrap " + this->_name + " ☠️  is dead!", 10000);
 }
 
 void ClapTrap::typeLikeHuman(const std::string& sentence, unsigned int microseconds) {
@@ -96,4 +96,9 @@ void ClapTrap::typeLikeHuman(const std::string& sentence, unsigned int microseco
 		usleep(microseconds); // Pause for the specified microseconds
 	}
 	std::cout << std::endl; // Move to the next line after the sentence is complete
+}
+
+int ClapTrap::getAttackDamage(void) const
+{
+	return (this->_attackDamage);
 }

@@ -1,3 +1,4 @@
+#include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 #include "ClapTrap.hpp"
 #include <iostream>
@@ -9,6 +10,15 @@ void typeLikeHuman(const std::string& sentence, unsigned int microseconds) {
 		usleep(microseconds); // Pause for the specified microseconds
 	}
 	std::cout << std::endl; // Move to the next line after the sentence is complete
+}
+
+void displayBothAttributes(FragTrap &a, FragTrap &b)
+{
+	std::cout << "╔════════════════════════════════REPORT══════════════════════════════════╗" << std::endl;
+	a.displayAttributes();
+	b.displayAttributes();
+	std::cout << "╚═════════════════════════════════════════════════════════════════════════╝" << std::endl;
+	std::cout << std::endl;
 }
 
 void displayBothAttributes(ScavTrap &a, ScavTrap &b)
@@ -33,43 +43,50 @@ int main( void )
 {
 	int idx = 0;
 
-	typeLikeHuman("👀👀👀👀👀 STARTING EX01 👀👀👀👀👀", 10000);
+	typeLikeHuman("🎯🎯🎯🎯🎯 STARTING EX02 🎯🎯🎯🎯🎯", 10000);
 	typeLikeHuman("Case " + std::to_string(idx++) + " (Press enter...)", 10000);
 	std::cin.get();
-	ScavTrap a("A");
-	ScavTrap b("B");
-	displayBothAttributes(a, b);
+	FragTrap e("E");
+	FragTrap f("F");
+	displayBothAttributes(e, f);
 
 	typeLikeHuman("Case " + std::to_string(idx++) + " (Press enter...)", 10000);
 	std::cin.get();
-	a.attack("B");
-	b.takeDamage(a.getAttackDamage());
-	displayBothAttributes(a, b);
+	e.attack("F");
+	f.takeDamage(e.getAttackDamage());
+	displayBothAttributes(e, f);
 	
 	typeLikeHuman("Case " + std::to_string(idx++) + " (Press enter...)", 10000);
 	std::cin.get();
-	b.attack("A");
-	a.takeDamage(b.getAttackDamage());
-	displayBothAttributes(a, b);
+	f.attack("E");
+	e.takeDamage(f.getAttackDamage());
+	displayBothAttributes(e, f);
 	
 	typeLikeHuman("Case " + std::to_string(idx++) + " (Press enter...)", 10000);
 	std::cin.get();
-	a.beRepaired(2);
-	b.beRepaired(2);
-	displayBothAttributes(a, b);
+	e.beRepaired(2);
+	f.beRepaired(2);
+	displayBothAttributes(e, f);
 
 	for (int i = 0; i < 3; i++)
 	{
 		typeLikeHuman("Case " + std::to_string(idx++) + " (Press enter...)", 10000);
 		std::cin.get();
-		a.attack("B");
-		b.takeDamage(a.getAttackDamage());
-		displayBothAttributes(a, b);
+		e.attack("F");
+		f.takeDamage(e.getAttackDamage());
+		displayBothAttributes(e, f);
 	}
 
 	typeLikeHuman("Case " + std::to_string(idx++) + " (Press enter...)", 10000);
 	std::cin.get();
-	a.attack("A");
+	e.attack("F");
+	displayBothAttributes(e, f);
+
+	typeLikeHuman("👀👀👀👀👀 SAME AS EX01 👀👀👀👀👀", 10000);
+	typeLikeHuman("Case " + std::to_string(idx++) + " (Press enter...)", 10000);
+	std::cin.get();
+	ScavTrap a("A");
+	ScavTrap b("B");
 	displayBothAttributes(a, b);
 
 	typeLikeHuman("👏🏻👏🏼👏🏽👏🏾👏🏿 SAME AS EX00 👏🏿👏🏾👏🏽👏🏼👏🏻", 10000);

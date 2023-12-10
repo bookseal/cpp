@@ -14,9 +14,10 @@ class ClapTrap
 		void attack(std::string const & target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
-		void displayAttributes(void);
 		void displayDead(void);
+		void displayAttributes(void);
 		void typeLikeHuman(const std::string& sentence, unsigned int microseconds);
+		int getAttackDamage(void) const;
 
 	private:
 		std::string _name;
