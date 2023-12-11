@@ -13,12 +13,14 @@ class ClapTrap
 		ClapTrap(const ClapTrap &src);
 		ClapTrap &operator=(const ClapTrap &rhs);
 		~ClapTrap(void);
+		
 		void attack(std::string const & target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
+
 		void displayDead(void);
-		void displayAttributes(void);
 		int getAttackDamage(void) const;
+		void displayAttributes(void);
 		void typeLikeHuman(const std::string& sentence, unsigned int microseconds);
 		std::string intToString(int value);
 

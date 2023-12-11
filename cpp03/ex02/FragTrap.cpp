@@ -1,6 +1,6 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(void)
+FragTrap::FragTrap(void): ClapTrap()
 {
 	std::cout << "🎯 Default constructor called" << std::endl;
 }
@@ -51,6 +51,11 @@ void FragTrap::attack(std::string const & target)
 		this->_energyPoints = 0;
 }
 
+void FragTrap::highFivesGuys(void)
+{
+	typeLikeHuman("🎯 FragTrap " + this->_name + " 🙌  wants to high five you!", 10000);
+}
+
 void FragTrap::displayDead(void)
 {
 	typeLikeHuman("🎯 FragTrap " + this->_name + " ☠️  is dead!", 10000);
@@ -61,7 +66,3 @@ void FragTrap::displayAttributes(void)
 	typeLikeHuman("║ 🎯 FragTrap " + this->_name + " has " + intToString(this->_hitPoints) + " hit points, " + intToString(this->_energyPoints) + " energy points and " + intToString(this->_attackDamage) + " attack damage. ║ ", 10000);
 } 
 
-void FragTrap::highFivesGuys(void)
-{
-	typeLikeHuman("🎯 FragTrap " + this->_name + " 🙌  wants to high five you!", 10000);
-}

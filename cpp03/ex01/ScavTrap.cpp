@@ -1,16 +1,16 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(void)
+ScavTrap::ScavTrap(void): ClapTrap()
 {
 	std::cout << "👀 Default constructor called" << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string name): ClapTrap(name)
 {
+	typeLikeHuman("👀 Name constructor called", 10000);
 	this->_hitPoints = 100;
 	this->_energyPoints = 50;
 	this->_attackDamage = 20;
-	typeLikeHuman("👀 Name constructor called", 10000);
 }
 
 ScavTrap::ScavTrap(const ScavTrap &src): ClapTrap(src)
@@ -51,6 +51,11 @@ void ScavTrap::attack(std::string const & target)
 		this->_energyPoints = 0;
 }
 
+void ScavTrap::guardGate(void)
+{
+	typeLikeHuman("👀 ScavTrap " + this->_name + " has entered in Gate keeper mode.", 10000);
+}
+
 void ScavTrap::displayDead(void)
 {
 	typeLikeHuman("👀 ScavTrap " + this->_name + " ☠️  is dead!", 10000);
@@ -60,8 +65,3 @@ void ScavTrap::displayAttributes(void)
 {
 	typeLikeHuman("║ 👀 ScavTrap " + this->_name + " has " + intToString(this->_hitPoints) + " hit points, " + intToString(this->_energyPoints) + " energy points and " + intToString(this->_attackDamage) + " attack damage. ║ ", 10000);
 } 
-
-void ScavTrap::guardGate(void)
-{
-	typeLikeHuman("👀 ScavTrap " + this->_name + " has entered in Gate keeper mode.", 10000);
-}

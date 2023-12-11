@@ -3,7 +3,7 @@
 #include <iostream>
 #include <unistd.h>
 #include <sstream>
-#include <string> 
+#include <string>
 
 class ClapTrap 
 {
@@ -13,15 +13,18 @@ class ClapTrap
 		ClapTrap(const ClapTrap &src);
 		ClapTrap &operator=(const ClapTrap &rhs);
 		~ClapTrap(void);
+		
 		void attack(std::string const & target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);
-		void displayDead(void);
-		void displayAttributes(void);
+
 		int getAttackDamage(void) const;
 		void typeLikeHuman(const std::string& sentence, unsigned int microseconds);
 		std::string intToString(int value);
 
+		void displayDead(void);
+		void displayAttributes(void);
+		
 	protected:
 		std::string _name;
 		int _hitPoints;

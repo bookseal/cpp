@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leegichan <leegichan@student.42.fr>        +#+  +:+       +#+         #
+#    By: gichlee <gichlee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/27 20:43:56 by gichlee           #+#    #+#              #
-#    Updated: 2023/12/10 17:27:01 by leegichan        ###   ########.fr        #
+#    Updated: 2023/12/11 15:22:32 by gichlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS		=	main.cpp \
 				FragTrap.cpp \
 
 OBJS		= $(SRCS:%.cpp=%.o)
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	= -Wall -Wextra -Werror -Wshadow -Wno-shadow -std=c++98
 RM			+= -f
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@

@@ -58,8 +58,11 @@ void ClapTrap::takeDamage(unsigned int amount)
 	}
 	typeLikeHuman("🤖 ****Trap " + this->_name + " 🤕 takes " + intToString(amount) + " points of damage!", 10000);
 	this->_hitPoints -= amount;
-	if (this->_hitPoints < 0)
+	if (this->_hitPoints <= 0)
+	{
+		displayDead();
 		this->_hitPoints = 0;
+	}
 }
 
 void ClapTrap::beRepaired(unsigned int amount)
@@ -72,7 +75,6 @@ void ClapTrap::beRepaired(unsigned int amount)
 	if (this->_hitPoints == 0)
 	{
 		displayDead();
-		std::cout << "🤖 ****Trap " << this->_name << " ☠️  is dead!" << std::endl;
 		return ;
 	}
 	typeLikeHuman("🤖 ****Trap " + this->_name + " 🛠️ is repaired for " + intToString(amount) + " points!", 10000);
@@ -87,7 +89,12 @@ void ClapTrap::displayDead(void)
 
 void ClapTrap::displayAttributes(void)
 {
-	typeLikeHuman("║ 👏 ClapTrap " + this->_name + " has " + intToString(this->_hitPoints) + " hit points, " + intToString(this->_energyPoints) + " energy points and " + intToString(this->_attackDamage) + " attack damage. ║ ", 10000);
+	typeLikeHuman("║ 👏 ClapTrap " + this->_name + " has " + intToString(this->_hitPoints) + " hit points, " + intToString(this->_energyPoints) + " energy points and " + intToString(this->_attackDamage) + " attack damage.  ║ ", 10000);
+}
+
+int ClapTrap::getAttackDamage(void) const
+{
+	return (this->_attackDamage);
 }
 
 std::string ClapTrap::intToString(int value)
@@ -103,9 +110,4 @@ void ClapTrap::typeLikeHuman(const std::string& sentence, unsigned int microseco
 		usleep(microseconds); // Pause for the specified microseconds
 	}
 	std::cout << std::endl; // Move to the next line after the sentence is complete
-}
-
-int ClapTrap::getAttackDamage(void) const
-{
-	return (this->_attackDamage);
 }
