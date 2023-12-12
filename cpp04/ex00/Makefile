@@ -14,7 +14,7 @@ NAME		= a.out
 SRCS		=	main.cpp \
 				Animal.cpp \
 				Dog.cpp \
-				# Cat.cpp \
+				Cat.cpp \
 
 OBJS		= $(SRCS:%.cpp=%.o)
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
