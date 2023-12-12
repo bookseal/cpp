@@ -3,6 +3,7 @@
 Animal::Animal()
 {
 	std::cout << "Animal default constructor called" << std::endl;
+	this->type = "Animal";
 }
 
 Animal::Animal(const Animal& copy)
@@ -33,4 +34,9 @@ void Animal::makeSound() const
 std::string Animal::getType() const
 {
 	return (this->type);
+}
+
+void Animal::setType(std::string type)
+{
+	this->type = type;
 }
