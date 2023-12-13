@@ -1,13 +1,13 @@
 #include "Cat.hpp"
 
-Cat::Cat(): Animal()
+Cat::Cat(): AAnimal()
 {
 	std::cout << "🐱Cat default constructor called" << std::endl;
 	this->type = "Cat";
 	this->brain = new Brain();
 }
 
-Cat::Cat(const Cat& copy)
+Cat::Cat(const Cat& copy): AAnimal()
 {
 	std::cout << "🐱Cat copy constructor called" << std::endl;
 	*this = copy;
@@ -25,6 +25,9 @@ Cat& Cat::operator=(const Cat& op)
 	if (this == &op)
 		return (*this);
 	this->type = op.type;
+	this->brain = new Brain();
+	for (int i = 0; i < 100; i++)
+		this->brain->setIdea(i, op.brain->getIdea(i));
 	return (*this);
 }
 

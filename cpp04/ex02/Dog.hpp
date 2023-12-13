@@ -1,10 +1,10 @@
 #ifndef DOG_HPP
 # define DOG_HPP
 
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Brain.hpp"
 
-class Dog : public Animal
+class Dog : public AAnimal
 {
 	public:
 		Dog();
@@ -12,10 +12,9 @@ class Dog : public Animal
 		~Dog();
 		Dog& operator=(const Dog& op);
 		void makeSound() const;
-		// std::string getType() const;
+		std::string getIdeaFromBrain(int i) const;
 	
 	private:
-		std::string type;
 		Brain* brain;
 };
 
