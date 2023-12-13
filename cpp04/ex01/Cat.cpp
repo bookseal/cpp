@@ -25,6 +25,9 @@ Cat& Cat::operator=(const Cat& op)
 	if (this == &op)
 		return (*this);
 	this->type = op.type;
+	this->brain = new Brain();
+	for (int i = 0; i < 100; i++)
+		this->brain->setIdea(i, op.brain->getIdea(i));
 	return (*this);
 }
 

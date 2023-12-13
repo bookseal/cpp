@@ -11,6 +11,8 @@ class Brain
 		Brain(const Brain& copy);
 		~Brain();
 		Brain& operator=(const Brain& op);
+		std::string getIdea(int index) const;
+		void setIdea(int index, std::string idea);
 	private:
 		std::string ideas[100];
 };
