@@ -9,8 +9,8 @@ class WrongAnimal
 	public:
 		WrongAnimal();
 		WrongAnimal(const WrongAnimal& copy);
-		~WrongAnimal();
-		// virtual ~WrongAnimal();
+		virtual ~WrongAnimal();
+		// ~WrongAnimal();
 		WrongAnimal& operator=(const WrongAnimal& op);
 		// virtual void makeSound() const;
 		void makeSound() const;

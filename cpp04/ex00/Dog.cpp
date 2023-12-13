@@ -3,7 +3,8 @@
 Dog::Dog(): Animal()
 {
 	std::cout << "🐶Dog default constructor called" << std::endl;
-	this->setType("Dog");
+	// this->setType("Dog");
+	this->type = "Dog";
 }
 
 Dog::Dog(const Dog& copy)

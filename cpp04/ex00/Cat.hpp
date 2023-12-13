@@ -10,10 +10,7 @@ class Cat : public Animal
 		Cat(const Cat& copy);
 		~Cat();
 		Cat& operator=(const Cat& op);
-		void makeSound() const;
-	
-	private:
-		std::string type;
+		void makeSound() const;	
 };
 
 #endif
