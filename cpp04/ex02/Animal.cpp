@@ -26,10 +26,10 @@ Animal& Animal::operator=(const Animal& op)
 	return (*this);
 }
 
-void Animal::makeSound() const
-{
-	std::cout << "👶Animal makeSound called" << std::endl;
-}
+// void Animal::makeSound() const
+// {
+// 	std::cout << "👶Animal makeSound called" << std::endl;
+// }
 
 std::string Animal::getType() const
 {
