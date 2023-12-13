@@ -12,6 +12,10 @@
 
 NAME		= a.out
 SRCS		=	main.cpp \
+				AMateria.cpp \
+				Character.cpp \
+				Ice.cpp \
+				MateriaSource.cpp \
 
 OBJS		= $(SRCS:%.cpp=%.o)
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
