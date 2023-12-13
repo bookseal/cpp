@@ -3,17 +3,27 @@
 #include "Cat.hpp"
 #include <iostream>
 
+void leaks(void) {
+	system("leaks a.out");
+}
+
 int main() {
-	// const Animal* meta = new Animal(); 
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+	atexit(leaks);
+	const Dog* j = new Dog();
+	const Cat* i = new Cat();
+
+	std::cout << std::endl;
 
 	std::cout << j->getType() << " " << std::endl; 
 	std::cout << i->getType() << " " << std::endl; 
 	
+	std::cout << std::endl;
+
 	j->makeSound();
 	i->makeSound();
 	
+	std::cout << std::endl;
+
 	delete j;
 	delete i;
 	

@@ -25,3 +25,8 @@ AAnimal& AAnimal::operator=(const AAnimal& op)
 	this->type = op.type;
 	return (*this);
 }
+
+std::string AAnimal::getType() const
+{
+	return (this->type);
+}
