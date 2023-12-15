@@ -3,9 +3,9 @@
 #include "Cat.hpp"
 #include <iostream>
 
-void leak(void) {
-	system("leaks a.out");
-}
+// void leak(void) {
+// 	system("leaks a.out");
+// }
 
 void print(std::string str)
 {
@@ -15,7 +15,7 @@ void print(std::string str)
 }
 
 int main() {
-	atexit(leak);
+	// atexit(leak);
 	print("Declare pointer array");
 	Animal *animals[10];
 

@@ -6,10 +6,10 @@
 #include <iostream>
 #include <unistd.h>
 
-void leaks(void)
-{
-	system("leaks a.out");
-}
+// void leaks(void)
+// {
+// 	system("leaks a.out");
+// }
 
 void print(std::string str)
 {
@@ -20,7 +20,7 @@ void print(std::string str)
 
 int main()
 {
-	atexit(leaks);
+	// atexit(leaks);
 
 	print("new MaterialSource");
 	IMateriaSource *src = new MateriaSource();

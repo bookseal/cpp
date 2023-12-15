@@ -3,12 +3,12 @@
 #include "Cat.hpp"
 #include <iostream>
 
-void leaks(void) {
-	system("leaks a.out");
-}
+// void leaks(void) {
+// 	system("leaks a.out");
+// }
 
 int main() {
-	atexit(leaks);
+	// atexit(leaks);
 	// const AAnimal* wrongAnimal = new AAnimal();
 	const Dog* j = new Dog();
 	const Cat* i = new Cat();

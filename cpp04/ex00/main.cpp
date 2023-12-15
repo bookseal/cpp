@@ -5,10 +5,10 @@
 #include "WrongCat.hpp"
 #include <iostream>
 
-void leaks(void)
-{
-	system("leaks a.out");
-}
+// void leaks(void)
+// {
+// 	system("leaks a.out");
+// }
 
 void print(std::string str)
 {
@@ -55,6 +55,6 @@ int main() {
 		delete wrongJ;
 	}
 
-	leaks();
+	// leaks();
 	return 0; 
 }
