@@ -7,10 +7,19 @@ void leak(void) {
 	system("leaks a.out");
 }
 
+void print(std::string str)
+{
+	std::cout << std::endl << std::endl;
+	std::cout << "Testing: " << str;
+	std::cin.get();
+}
+
 int main() {
 	atexit(leak);
+	print("Declare pointer array");
 	Animal *animals[10];
 
+	print("new Dog() and new Cat()");
 	for (int i = 0; i < 5; i++)
 	{
 		if (i % 2 == 0)
@@ -21,6 +30,7 @@ int main() {
 	}
 
 	{
+		print("makeSound()");
 		std::cout << std::endl;
 		Animal *tmp;
 		for (int i = 0; i < 5; i++)
@@ -31,24 +41,28 @@ int main() {
 		std::cout << std::endl;
 	}
 
+	print("delete");
 	for (int i = 0; i < 5; i++)
 	{
 		delete animals[i];
 		std::cout << std::endl;
 	}
 
-	std::cout << std::endl;
+	{
+		print("copy Dog");
+		Dog *originDog = new Dog();
+		std::cout << std::endl;
+		Dog copyDog = *originDog;
+		copyDog.makeSound();
 
-	Dog *originDog = new Dog();
-	std::cout << std::endl;
-	Dog copyDog = *originDog;
-	copyDog.makeSound();
+		print("delete originDog");
+		delete originDog;
 
-	std::cout << std::endl;
+		print("check deep copy");
+		std::cout << copyDog.getIdeaFromBrain(42) << std::endl;
+		copyDog.makeSound();
+	}
 
-	delete originDog;
-	std::cout << copyDog.getIdeaFromBrain(42) << std::endl;
-	copyDog.makeSound();
-	std::cout << std::endl;
+	print("leak check");
 	return 0; 
 }

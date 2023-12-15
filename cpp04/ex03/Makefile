@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leegichan <leegichan@student.42.fr>        +#+  +:+       +#+         #
+#    By: gichlee <gichlee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/27 20:43:56 by gichlee           #+#    #+#              #
-#    Updated: 2023/12/11 01:11:22 by leegichan        ###   ########.fr        #
+#    Updated: 2023/12/15 18:10:29 by gichlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRCS		=	main.cpp \
 				AMateria.cpp \
 				Character.cpp \
 				Ice.cpp \
+				Cure.cpp \
 				MateriaSource.cpp \
 
 OBJS		= $(SRCS:%.cpp=%.o)

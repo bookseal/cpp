@@ -12,6 +12,7 @@ class AAnimal
 		AAnimal& operator=(const AAnimal& op);
 		virtual ~AAnimal();
 		virtual void makeSound() const = 0;
+		// virtual void makeSound() const;
 		std::string getType() const;
 	
 	protected:

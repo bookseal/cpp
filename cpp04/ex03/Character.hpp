@@ -11,8 +11,11 @@ class Character: public ICharacter
 {
 	private:
 		std::string name;
-		AMateria* inventory[4];
 		int count;
+		AMateria* inventory[4];
+		AMateria* on_the_floor[100];
+		int on_the_floor_count;
+
 	public:
 		Character();
 		Character(std::string name);
@@ -23,7 +26,10 @@ class Character: public ICharacter
 		std::string const &getName() const;
 		void equip(AMateria *m);
 		void unequip(int idx);
-		void use(int idx, ICharacter &target);	
+		void use(int idx, ICharacter &target);
+
+		void deep_inventory_copy(const Character& from, Character* to);
+		void deep_on_the_floor_copy(const Character& from, Character* to);
 };
 
 #endif

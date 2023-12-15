@@ -9,6 +9,7 @@ void leaks(void) {
 
 int main() {
 	atexit(leaks);
+	// const AAnimal* wrongAnimal = new AAnimal();
 	const Dog* j = new Dog();
 	const Cat* i = new Cat();
 
