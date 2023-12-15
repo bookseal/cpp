@@ -11,11 +11,6 @@ Ice::Ice(const Ice& copy): AMateria(copy)
 	*this = copy;
 }
 
-Ice::~Ice()
-{
-	std::cout << "🧊Ice destructor called" << std::endl;
-}
-
 Ice& Ice::operator=(const Ice& op)
 {
 	std::cout << "🧊Ice assignation operator called" << std::endl;
@@ -23,6 +18,11 @@ Ice& Ice::operator=(const Ice& op)
 		return (*this);
 	this->_type = op._type;
 	return (*this);
+}
+
+Ice::~Ice()
+{
+	std::cout << "🧊Ice destructor called" << std::endl;
 }
 
 Ice* Ice::clone() const

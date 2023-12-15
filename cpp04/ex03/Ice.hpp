@@ -5,8 +5,6 @@
 
 class Ice: public AMateria
 {
-	protected:
-		std::string _type;
 	public:
 		Ice();
 		Ice(const Ice& copy);
@@ -15,6 +13,9 @@ class Ice: public AMateria
 		
 		Ice* clone() const;
 		void use(ICharacter &target);
+	
+	private:
+		std::string _type;
 };
 
 #endif
