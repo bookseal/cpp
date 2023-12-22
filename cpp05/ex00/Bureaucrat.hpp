@@ -23,8 +23,21 @@ class Bureaucrat
 	private:
 		const std::string	_name;
 		int					_grade;
+		class GradeTooHighException;
+		class GradeTooLowException;
+
 	public:
-		
+		Bureaucrat();
+		Bureaucrat(std::string name, int grade);
+		Bureaucrat(const Bureaucrat &copy);
+		~Bureaucrat();
+		Bureaucrat &operator=(const Bureaucrat &copy);
+
+		const std::string	&getName() const;
+		int					getGrade() const;
+		void				incrementGrade();
+		void				decrementGrade();
+		std::of
 }
 
 #endif
