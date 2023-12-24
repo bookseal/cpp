@@ -39,14 +39,24 @@ Form::Form(std::string name, int gradeToSign, int gradeToExecute)
 	try {
 		checkGrade(gradeToSign);
 	}
-	catch (std::exception &e) {
+	catch (Form::GradeTooHighException &e) {
+		gradeToSign = 1;
+		std::cout << e.what() << std::endl;
+	}
+	catch (Form::GradeTooLowException &e) {
+		gradeToSign = 150;
 		std::cout << e.what() << std::endl;
 	}
 
 	try {
 		checkGrade(gradeToExecute);
 	}
-	catch (std::exception &e) {
+	catch (Form::GradeTooHighException &e) {
+		gradeToExecute = 1;
+		std::cout << e.what() << std::endl;
+	}
+	catch (Form::GradeTooLowException &e) {
+		gradeToExecute = 150;
 		std::cout << e.what() << std::endl;
 	}
 }
@@ -91,6 +101,7 @@ int					Form::getGradeToExecute() const
 	return (_gradeToExecute);
 }
 
+// ex01
 void				Form::beSigned(Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > _gradeToSign)

@@ -20,6 +20,7 @@ class Bureaucrat
 		Bureaucrat &operator=(const Bureaucrat &copy);
 
 		void				checkGrade(int grade);
+		
 		const std::string	&getName() const;
 		int					getGrade() const;
 		void				incrementGrade();

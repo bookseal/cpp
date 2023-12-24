@@ -6,16 +6,16 @@
 
 #include "AForm.hpp"
 
-class RobotomyrequestForm : public AForm
+class RobotomyRequestForm : public AForm
 {
 	private:
 		std::string		_target;
 	public:
-		RobotomyrequestForm();
-		RobotomyrequestForm(std::string target);
-		RobotomyrequestForm(const RobotomyrequestForm &copy);
-		~RobotomyrequestForm();
-		RobotomyrequestForm &operator=(const RobotomyrequestForm &copy);
+		RobotomyRequestForm();
+		RobotomyRequestForm(std::string target);
+		RobotomyRequestForm(const RobotomyRequestForm &copy);
+		~RobotomyRequestForm();
+		RobotomyRequestForm &operator=(const RobotomyRequestForm &copy);
 
 		std::string const	&getTarget() const;
 		void				execute(Bureaucrat const &executor) const;

@@ -1,5 +1,9 @@
 #include "Bureaucrat.hpp"
 
+Bureaucrat::Bureaucrat() : _name("default"), _grade(150)
+{
+}
+
 class Bureaucrat::GradeTooHighException : public std::exception
 {
 	public:
@@ -18,8 +22,12 @@ class Bureaucrat::GradeTooLowException : public std::exception
 		}
 };
 
-Bureaucrat::Bureaucrat() : _name("default"), _grade(150)
+void Bureaucrat::checkGrade(int grade)
 {
+	if (grade < 1)
+		throw Bureaucrat::GradeTooHighException();
+	else if (grade > 150)
+		throw Bureaucrat::GradeTooLowException();
 }
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
@@ -28,15 +36,14 @@ Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 		checkGrade(grade);
 	}
 	catch (Bureaucrat::GradeTooHighException &e) {
-		std::cout << e.what() << std::endl;
 		_grade = 1;
+		std::cout << e.what() << std::endl;
 	}
 	catch (Bureaucrat::GradeTooLowException &e) {
-		std::cout << e.what() << std::endl;
 		_grade = 150;
+		std::cout << e.what() << std::endl;
 	}
 }
-
 
 Bureaucrat::Bureaucrat(const Bureaucrat &copy) : _name(copy._name), _grade(copy._grade)
 {
@@ -52,14 +59,6 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &copy)
 		return (*this);
 	_grade = copy._grade;
 	return (*this);
-}
-
-void Bureaucrat::checkGrade(int grade)
-{
-	if (grade < 1)
-		throw Bureaucrat::GradeTooHighException();
-	else if (grade > 150)
-		throw Bureaucrat::GradeTooLowException();
 }
 
 const std::string &Bureaucrat::getName() const

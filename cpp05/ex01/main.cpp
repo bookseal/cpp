@@ -3,7 +3,6 @@
 int main(void)
 {
 	{
-		std::cin.get();
 		Bureaucrat b("b", 42);
 		std::cout << b << std::endl;
 		Form f("f", 42, 42);
@@ -12,6 +11,8 @@ int main(void)
 		std::cout << f << std::endl;
 	}
 
+	std::cout << std::endl;
+	
 	{
 		std::cin.get();
 		Bureaucrat b("b", 99);

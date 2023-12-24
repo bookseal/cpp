@@ -3,7 +3,6 @@
 int main(void)
 {
 	{
-		std::cin.get();
 		Bureaucrat b("b", 1);
 		std::cout << b << std::endl;
 		b.incrementGrade();

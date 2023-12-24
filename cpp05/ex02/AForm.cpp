@@ -22,6 +22,7 @@ class AForm::GradeTooLowException : public std::exception
 		}
 };
 
+// ex02
 class AForm::NotSignedException : public std::exception
 {
 	public:
@@ -48,14 +49,24 @@ AForm::AForm(std::string name, int gradeToSign, int gradeToExecute)
 	try {
 		checkGrade(gradeToSign);
 	}
-	catch (std::exception &e) {
+	catch (AForm::GradeTooHighException &e) {
+		gradeToSign = 1;
+		std::cout << e.what() << std::endl;
+	}
+	catch (AForm::GradeTooLowException &e) {
+		gradeToSign = 150;
 		std::cout << e.what() << std::endl;
 	}
 
 	try {
 		checkGrade(gradeToExecute);
 	}
-	catch (std::exception &e) {
+	catch (AForm::GradeTooHighException &e) {
+		gradeToExecute = 1;
+		std::cout << e.what() << std::endl;
+	}
+	catch (AForm::GradeTooLowException &e) {
+		gradeToExecute = 150;
 		std::cout << e.what() << std::endl;
 	}
 }
@@ -100,6 +111,7 @@ int					AForm::getGradeToExecute() const
 	return (_gradeToExecute);
 }
 
+// ex01
 void				AForm::beSigned(Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > _gradeToSign)
@@ -118,6 +130,7 @@ std::ostream	&operator<<(std::ostream &out, const AForm &Aform)
 	return (out);
 }
 
+// ex02
 void	AForm::execute(Bureaucrat const &executor) const
 {
 	if (!_signed)

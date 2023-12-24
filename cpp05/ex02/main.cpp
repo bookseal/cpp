@@ -6,7 +6,6 @@
 int main(void)
 {
 	{
-		std::cin.get();
 		Bureaucrat staff("staff", 150);
 		std::cout << staff << std::endl;
 		ShrubberyCreationForm f("form");
@@ -45,7 +44,7 @@ int main(void)
 		std::cin.get();
 		Bureaucrat staff("staff", 1);
 		std::cout << staff << std::endl;
-		RobotomyrequestForm f("form");
+		RobotomyRequestForm f("form");
 		staff.signForm(f);
 		staff.executeForm(f);
 	}
