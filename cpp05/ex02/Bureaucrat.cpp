@@ -1,5 +1,10 @@
 #include "Bureaucrat.hpp"
 
+
+Bureaucrat::Bureaucrat() : _name("default"), _grade(150)
+{
+}
+
 class Bureaucrat::GradeTooHighException : public std::exception
 {
 	public:
@@ -18,25 +23,18 @@ class Bureaucrat::GradeTooLowException : public std::exception
 		}
 };
 
-Bureaucrat::Bureaucrat() : _name("default"), _grade(150)
+void Bureaucrat::checkGrade(int grade)
 {
+	if (grade < 1)
+		throw Bureaucrat::GradeTooHighException();
+	else if (grade > 150)
+		throw Bureaucrat::GradeTooLowException();
 }
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 {
-	try {
-		checkGrade(grade);
-	}
-	catch (Bureaucrat::GradeTooHighException &e) {
-		std::cout << e.what() << std::endl;
-		_grade = 1;
-	}
-	catch (Bureaucrat::GradeTooLowException &e) {
-		std::cout << e.what() << std::endl;
-		_grade = 150;
-	}
+	checkGrade(grade);
 }
-
 
 Bureaucrat::Bureaucrat(const Bureaucrat &copy) : _name(copy._name), _grade(copy._grade)
 {
@@ -52,14 +50,6 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &copy)
 		return (*this);
 	_grade = copy._grade;
 	return (*this);
-}
-
-void Bureaucrat::checkGrade(int grade)
-{
-	if (grade < 1)
-		throw Bureaucrat::GradeTooHighException();
-	else if (grade > 150)
-		throw Bureaucrat::GradeTooLowException();
 }
 
 const std::string &Bureaucrat::getName() const
@@ -96,10 +86,11 @@ void Bureaucrat::decrementGrade()
 
 std::ostream	&operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
 {
-	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
+	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << '.' << std::endl;
 	return (out);
 }
 
+// ex01
 void Bureaucrat::signForm(AForm &form)
 {
 	try {
@@ -107,10 +98,11 @@ void Bureaucrat::signForm(AForm &form)
 		std::cout << _name << " signed " << form.getName() << std::endl;
 	}
 	catch (std::exception &e) {
-		std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+		std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << "." << std::endl;
 	}
 }
 
+// ex02
 void Bureaucrat::executeForm(AForm const &form)
 {
 	try {

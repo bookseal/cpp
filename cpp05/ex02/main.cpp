@@ -5,6 +5,7 @@
 
 int main(void)
 {
+	try
 	{
 		Bureaucrat staff("staff", 150);
 		std::cout << staff << std::endl;
@@ -12,7 +13,11 @@ int main(void)
 		staff.signForm(f);
 		staff.executeForm(f);
 	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 
+	try
 	{
 		std::cin.get();
 		Bureaucrat staff("staff", 140);
@@ -21,7 +26,11 @@ int main(void)
 		staff.signForm(f);
 		staff.executeForm(f);
 	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 
+	try
 	{
 		std::cin.get();
 		Bureaucrat staff("staff", 130);
@@ -30,7 +39,11 @@ int main(void)
 		staff.signForm(f);
 		staff.executeForm(f);
 	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 
+	try
 	{
 		std::cin.get();
 		Bureaucrat staff("staff", 1);
@@ -39,7 +52,11 @@ int main(void)
 		// staff.signForm(f);
 		staff.executeForm(f);
 	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 
+	try
 	{
 		std::cin.get();
 		Bureaucrat staff("staff", 1);
@@ -48,7 +65,11 @@ int main(void)
 		staff.signForm(f);
 		staff.executeForm(f);
 	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 
+	try
 	{
 		std::cin.get();
 		Bureaucrat staff("staff", 1);
@@ -57,5 +78,9 @@ int main(void)
 		staff.signForm(f);
 		staff.executeForm(f);
 	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+	
 	return (0);
 }

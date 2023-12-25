@@ -22,16 +22,6 @@ class AForm::GradeTooLowException : public std::exception
 		}
 };
 
-// ex02
-class AForm::NotSignedException : public std::exception
-{
-	public:
-		virtual const char *what() const throw()
-		{
-			return ("Form not signed");
-		}
-};
-
 void AForm::checkGrade(int grade)
 {
 	if (grade < 1)
@@ -46,29 +36,8 @@ AForm::AForm(std::string name, int gradeToSign, int gradeToExecute)
 	, _gradeToSign(gradeToSign)
 	, _gradeToExecute(gradeToExecute)
 {
-	try {
-		checkGrade(gradeToSign);
-	}
-	catch (AForm::GradeTooHighException &e) {
-		gradeToSign = 1;
-		std::cout << e.what() << std::endl;
-	}
-	catch (AForm::GradeTooLowException &e) {
-		gradeToSign = 150;
-		std::cout << e.what() << std::endl;
-	}
-
-	try {
-		checkGrade(gradeToExecute);
-	}
-	catch (AForm::GradeTooHighException &e) {
-		gradeToExecute = 1;
-		std::cout << e.what() << std::endl;
-	}
-	catch (AForm::GradeTooLowException &e) {
-		gradeToExecute = 150;
-		std::cout << e.what() << std::endl;
-	}
+	checkGrade(gradeToSign);
+	checkGrade(gradeToExecute);
 }
 
 AForm::AForm(const AForm &copy) 
@@ -129,6 +98,16 @@ std::ostream	&operator<<(std::ostream &out, const AForm &Aform)
 	out << " and requires grade " << Aform.getGradeToSign() << " to sign and grade " << Aform.getGradeToExecute() << " to execute";
 	return (out);
 }
+
+// ex02
+class AForm::NotSignedException : public std::exception
+{
+	public:
+		virtual const char *what() const throw()
+		{
+			return ("Form not signed");
+		}
+};
 
 // ex02
 void	AForm::execute(Bureaucrat const &executor) const
