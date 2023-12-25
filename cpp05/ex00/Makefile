@@ -12,7 +12,7 @@
 
 NAME		= a.out
 SRCS		=	main.cpp \
-				Bureaucrat.cpp 
+				Bureaucrat.cpp \
 
 OBJS		= $(SRCS:%.cpp=%.o)
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
