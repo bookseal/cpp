@@ -1,5 +1,6 @@
 #include "Bureaucrat.hpp"
 
+
 Bureaucrat::Bureaucrat() : _name("default"), _grade(150)
 {
 }
@@ -32,17 +33,7 @@ void Bureaucrat::checkGrade(int grade)
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(grade)
 {
-	try {
-		checkGrade(grade);
-	}
-	catch (Bureaucrat::GradeTooHighException &e) {
-		_grade = 1;
-		std::cout << e.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException &e) {
-		_grade = 150;
-		std::cout << e.what() << std::endl;
-	}
+	checkGrade(grade);
 }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &copy) : _name(copy._name), _grade(copy._grade)
@@ -95,10 +86,11 @@ void Bureaucrat::decrementGrade()
 
 std::ostream	&operator<<(std::ostream &out, const Bureaucrat &bureaucrat)
 {
-	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade();
+	out << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade() << '.' << std::endl;
 	return (out);
 }
 
+// ex01
 void Bureaucrat::signForm(Form &form)
 {
 	try {
@@ -106,6 +98,6 @@ void Bureaucrat::signForm(Form &form)
 		std::cout << _name << " signed " << form.getName() << std::endl;
 	}
 	catch (std::exception &e) {
-		std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << std::endl;
+		std::cout << _name << " couldn't sign " << form.getName() << " because " << e.what() << "." << std::endl;
 	}
 }

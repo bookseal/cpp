@@ -36,29 +36,8 @@ Form::Form(std::string name, int gradeToSign, int gradeToExecute)
 	, _gradeToSign(gradeToSign)
 	, _gradeToExecute(gradeToExecute)
 {
-	try {
-		checkGrade(gradeToSign);
-	}
-	catch (Form::GradeTooHighException &e) {
-		gradeToSign = 1;
-		std::cout << e.what() << std::endl;
-	}
-	catch (Form::GradeTooLowException &e) {
-		gradeToSign = 150;
-		std::cout << e.what() << std::endl;
-	}
-
-	try {
-		checkGrade(gradeToExecute);
-	}
-	catch (Form::GradeTooHighException &e) {
-		gradeToExecute = 1;
-		std::cout << e.what() << std::endl;
-	}
-	catch (Form::GradeTooLowException &e) {
-		gradeToExecute = 150;
-		std::cout << e.what() << std::endl;
-	}
+	checkGrade(gradeToSign);
+	checkGrade(gradeToExecute);
 }
 
 Form::Form(const Form &copy) 
