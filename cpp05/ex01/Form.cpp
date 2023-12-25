@@ -65,23 +65,23 @@ std::string const	&Form::getName() const
 	return (_name);
 }
 
-bool				Form::getSigned() const
+bool	Form::getSigned() const
 {
 	return (_signed);
 }
 
-int					Form::getGradeToSign() const
+int	Form::getGradeToSign() const
 {
 	return (_gradeToSign);
 }
 
-int					Form::getGradeToExecute() const
+int	Form::getGradeToExecute() const
 {
 	return (_gradeToExecute);
 }
 
 // ex01
-void				Form::beSigned(Bureaucrat &bureaucrat)
+void	Form::beSigned(Bureaucrat &bureaucrat)
 {
 	if (bureaucrat.getGrade() > _gradeToSign)
 		throw Form::GradeTooLowException();
