@@ -6,19 +6,21 @@
 
 int main(void)
 {
+	try
 	{
 		Bureaucrat	staff("staff", 42);
 		Intern	someRandomIntern;
 		AForm*	rrf;
 
 		rrf = someRandomIntern.makeForm("unknown", "Bender");
-		if (rrf)
-		{
-			staff.signForm(*rrf);
-			staff.executeForm(*rrf);
-		}
+		staff.signForm(*rrf);
+		staff.executeForm(*rrf);
+	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
 	}
 
+	try
 	{
 		std::cin.get();
 		Bureaucrat	staff("staff", 42);
@@ -26,13 +28,14 @@ int main(void)
 		AForm*	rrf;
 
 		rrf = someRandomIntern.makeForm("shrubbery creation", "Bender");
-		if (rrf)
-		{
-			// staff.signForm(*rrf);
-			staff.executeForm(*rrf);
-		}
+		// staff.signForm(*rrf);
+		staff.executeForm(*rrf);
+	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
 	}
 
+	try
 	{
 		std::cin.get();
 		Bureaucrat	staff("staff", 42);
@@ -40,13 +43,14 @@ int main(void)
 		AForm*	rrf;
 
 		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-		if (rrf)
-		{
-			staff.signForm(*rrf);
-			staff.executeForm(*rrf);
-		}
+		staff.signForm(*rrf);
+		staff.executeForm(*rrf);
+	}
+	catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
 	}
 
+	try
 	{
 		std::cin.get();
 		Bureaucrat	staff("staff", 1);
@@ -54,11 +58,11 @@ int main(void)
 		AForm*	rrf;
 
 		rrf = someRandomIntern.makeForm("presidential pardon", "Bender");
-		if (rrf)
-		{
-			staff.signForm(*rrf);
-			staff.executeForm(*rrf);
-		}
+		staff.signForm(*rrf);
+		staff.executeForm(*rrf);
+	}
+		catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
 	}
 	return (0);
 }

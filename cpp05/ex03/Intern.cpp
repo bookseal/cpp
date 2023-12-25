@@ -42,20 +42,15 @@ AForm *Intern::makeForm(std::string form_name, std::string target)
 		PresidentialPardonForm::create
 	};
 	
-	try {
-		for (int i = 0; i < FORMS; i++)
+	for (int i = 0; i < FORMS; i++)
+	{
+		if (form_name == form_names[i])
 		{
-			if (form_name == form_names[i])
-			{
-				form = form_creators[i](target);
-				std::cout << "Intern creates " << form->getName() << std::endl;
-				return (form);
-			}
+			form = form_creators[i](target);
+			std::cout << "Intern creates " << form->getName() << std::endl;
+			return (form);
 		}
-		throw Intern::FormNotFoundException();
 	}
-	catch (std::exception &e) {
-		std::cout << e.what() << std::endl;
-	}
+	throw Intern::FormNotFoundException();
 	return (NULL);
 }

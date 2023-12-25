@@ -11,6 +11,7 @@ class ShrubberyCreationForm : public AForm
 {
 	private:
 		std::string		_target;
+		class			FileOpenException;
 	public:
 		ShrubberyCreationForm();
 		ShrubberyCreationForm(std::string target);

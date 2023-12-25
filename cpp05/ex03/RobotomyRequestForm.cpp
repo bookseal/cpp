@@ -33,6 +33,7 @@ std::string const	&RobotomyRequestForm::getTarget() const
 void RobotomyRequestForm::execute(Bureaucrat const &executor) const
 {
 	try {
+		srand(time(NULL));
 		AForm::execute(executor);
 		std::cout << "* drilling noises *" << std::endl;
 		if (rand() % 2)
