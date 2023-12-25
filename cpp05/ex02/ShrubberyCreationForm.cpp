@@ -30,11 +30,22 @@ std::string const	&ShrubberyCreationForm::getTarget() const
 	return (_target);
 }
 
+class ShrubberyCreationForm::FileOpenException : public std::exception
+{
+	public:
+		virtual const char *what() const throw()
+		{
+			return ("File open failed");
+		}
+};
+
 void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
 	AForm::execute(executor);
 	std::ofstream file;
 	file.open((_target + "_shrubbery").c_str());
+	if (!file.is_open())
+		throw ShrubberyCreationForm::FileOpenException();
 	file << "       _-_" << std::endl;
 	file << "    /~~   ~~\\" << std::endl;
 	file << " /~~         ~~\\" << std::endl;
