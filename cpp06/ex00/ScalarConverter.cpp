@@ -9,41 +9,82 @@ class ScalarConverter::ImpossibleException: public std::exception
 		}
 };
 
-void	checkFloat(std::string str)
+
+void	ScalarConverter::checkDouble(double str_d)
 {
-	(void)str;
+	std::cout << "double: ";
+
+	if (std::isnan(str_d))
+		std::cout << "nan";
+	else if (std::isinf(str_d))
+		std::cout << ((str_d < 0) ? "-inf" : "+inf");
+	else if (str_d < DBL_MIN || str_d > DBL_MAX)
+		throw ScalarConverter::ImpossibleException();
+	else
+		std::cout << std::fixed << std::setprecision(1) << static_cast<double>(str_d) << "f";
+
+	std::cout << std::endl;
 }
 
-void	checkDouble(std::string str)
+void	ScalarConverter::checkFloat(double str_d)
 {
-	(void)str;
+	std::cout << "float: ";
 
+	if (std::isnan(str_d))
+		std::cout << "nanf";
+	else if (std::isinf(str_d))
+		std::cout << ((str_d < 0) ? "-inff" : "+inff");
+	else if (str_d < FLT_MIN || str_d > FLT_MAX)
+		throw ScalarConverter::ImpossibleException();
+	else
+		std::cout << std::fixed << std::setprecision(1) << static_cast<float>(str_d) << "f";
+	std::cout << std::endl;
 }
 
-void	checkInt(std::string str)
+void	ScalarConverter::checkInt(double str_d)
 {
-	(void)str;
+	std::cout << "int: ";
 
+	if (str_d < INT_MIN || str_d > INT_MAX)
+		throw ScalarConverter::ImpossibleException();
+	else if (std::isnan(str_d) || std::isinf(str_d))
+		throw ScalarConverter::ImpossibleException();
+	else
+		std::cout << static_cast<int>(str_d);
+	std::cout << std::endl;
 }
 
-void	checkChar(std::string str)
+void	ScalarConverter::checkChar(double str_d)
 {
 	std::cout << "char: ";
 
-	if (str.length() == 1 && !isdigit(str[0]))
-		std::cout << "'" << str[0] << "'" << std::endl;
-	else if (str.length() == 1 && isdigit(str[0]))
-		std::cout << "Non displayable" << std::endl;
-	else if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
-		std::cout << "'" << str[1] << "'" << std::endl;
-	else
+	if (str_d < 0 || str_d > 127)
 		throw ScalarConverter::ImpossibleException();
+	else if (std::isnan(str_d) || std::isinf(str_d))
+		throw ScalarConverter::ImpossibleException();
+	else if (str_d < 32 || str_d > 126)
+		std::cout << "Non displayable";
+	else
+		std::cout << "'" << static_cast<char>(str_d) << "'";
+	std::cout << std::endl;
 }
 
 void	ScalarConverter::convert(std::string str)
 {
-	checkChar(str);
-	checkInt(str);
-	checkFloat(str);
-	checkDouble(str);
+	double str_d = std::strtod(str.c_str(), NULL);
+
+	try { checkChar(str_d); }
+	catch (std::exception &e) { std::cout << e.what() << std::endl; }
+	
+	try { checkInt(str_d); }
+	catch (std::exception &e) { std::cout << e.what() << std::endl; }
+
+	try { checkFloat(str_d); }
+	catch (std::exception &e) { std::cout << e.what() << std::endl; }
+
+	try { checkDouble(str_d); }
+	catch (std::exception &e) { std::cout << e.what() << std::endl; }
+
+	std::cout << std::endl;
+
 };
