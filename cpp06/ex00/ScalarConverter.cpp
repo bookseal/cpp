@@ -18,10 +18,10 @@ void	ScalarConverter::checkDouble(double str_d)
 		std::cout << "nan";
 	else if (std::isinf(str_d))
 		std::cout << ((str_d < 0) ? "-inf" : "+inf");
-	else if (str_d < DBL_MIN || str_d > DBL_MAX)
-		throw ScalarConverter::ImpossibleException();
+	// else if (str_d < DBL_MIN || str_d > DBL_MAX)
+	// 	throw ScalarConverter::ImpossibleException();
 	else
-		std::cout << std::fixed << std::setprecision(1) << static_cast<double>(str_d) << "f";
+		std::cout << std::fixed << std::setprecision(1) << static_cast<double>(str_d);
 
 	std::cout << std::endl;
 }
@@ -34,8 +34,8 @@ void	ScalarConverter::checkFloat(double str_d)
 		std::cout << "nanf";
 	else if (std::isinf(str_d))
 		std::cout << ((str_d < 0) ? "-inff" : "+inff");
-	else if (str_d < FLT_MIN || str_d > FLT_MAX)
-		throw ScalarConverter::ImpossibleException();
+	// else if (str_d < FLT_MIN || str_d > FLT_MAX)
+	// 	throw ScalarConverter::ImpossibleException();
 	else
 		std::cout << std::fixed << std::setprecision(1) << static_cast<float>(str_d) << "f";
 	std::cout << std::endl;
