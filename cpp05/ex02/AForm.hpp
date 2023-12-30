@@ -15,6 +15,7 @@ class AForm {
 		int const			_gradeToExecute;
 		class 				GradeTooHighException;
 		class				GradeTooLowException;
+
 		// ex02
 		class				NotSignedException;
 	
@@ -34,6 +35,7 @@ class AForm {
 
 		// ex01
 		void				beSigned(Bureaucrat &bureaucrat);
+		
 		// ex02
 		virtual	void		execute(Bureaucrat const &executor) const;
 };

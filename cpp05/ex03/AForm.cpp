@@ -99,7 +99,6 @@ std::ostream	&operator<<(std::ostream &out, const AForm &Aform)
 	return (out);
 }
 
-// ex02
 class AForm::NotSignedException : public std::exception
 {
 	public:
@@ -109,7 +108,6 @@ class AForm::NotSignedException : public std::exception
 		}
 };
 
-// ex02
 void	AForm::execute(Bureaucrat const &executor) const
 {
 	if (!_signed)

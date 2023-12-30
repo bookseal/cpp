@@ -15,7 +15,6 @@ class AForm {
 		int const			_gradeToExecute;
 		class 				GradeTooHighException;
 		class				GradeTooLowException;
-		// ex02
 		class				NotSignedException;
 	
 	public:
@@ -24,17 +23,12 @@ class AForm {
 		AForm(const AForm &copy);
 		virtual ~AForm();
 		AForm &operator=(const AForm &copy);
-
 		void				checkGrade(int grade);
-
 		std::string const	&getName() const;
 		bool				getSigned() const;
 		int					getGradeToSign() const;
 		int					getGradeToExecute() const;
-
-		// ex01
 		void				beSigned(Bureaucrat &bureaucrat);
-		// ex02
 		virtual	void		execute(Bureaucrat const &executor) const;
 };
 

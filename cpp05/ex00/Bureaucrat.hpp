@@ -9,8 +9,8 @@ class Bureaucrat
 	private:
 		const std::string	_name;
 		int					_grade;
-		class GradeTooHighException;
-		class GradeTooLowException;
+		class				GradeTooHighException;
+		class				GradeTooLowException;
 
 	public:
 		Bureaucrat();

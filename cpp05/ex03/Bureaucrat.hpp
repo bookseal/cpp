@@ -10,10 +10,11 @@ class Bureaucrat
 	private:
 		const std::string	_name;
 		int					_grade;
-		class GradeTooHighException;
-		class GradeTooLowException;
+		class			GradeTooHighException;
+		class			GradeTooLowException;
+
 		// ex03
-		class NotFoundException;
+		class			NotFoundException;
 
 	public:
 		Bureaucrat();
@@ -27,9 +28,7 @@ class Bureaucrat
 		int					getGrade() const;
 		void				incrementGrade();
 		void				decrementGrade();
-
 		void 				signForm(class AForm &Aform);
-
 		void				executeForm(AForm const &Aform);
 };
 
