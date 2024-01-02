@@ -10,7 +10,7 @@ class ScalarConverter::ImpossibleException: public std::exception
 };
 
 
-void	ScalarConverter::checkDouble(double str_d)
+void	ScalarConverter::showDouble(double str_d)
 {
 	std::cout << "double: ";
 
@@ -24,7 +24,7 @@ void	ScalarConverter::checkDouble(double str_d)
 	std::cout << std::endl;
 }
 
-void	ScalarConverter::checkFloat(double str_d)
+void	ScalarConverter::showFloat(double str_d)
 {
 	std::cout << "float: ";
 
@@ -37,7 +37,7 @@ void	ScalarConverter::checkFloat(double str_d)
 	std::cout << std::endl;
 }
 
-void	ScalarConverter::checkInt(double str_d)
+void	ScalarConverter::showInt(double str_d)
 {
 	std::cout << "int: ";
 
@@ -49,7 +49,7 @@ void	ScalarConverter::checkInt(double str_d)
 		std::cout << static_cast<int>(str_d) << std::endl;
 }
 
-void	ScalarConverter::checkChar(std::string str, double str_d)
+void	ScalarConverter::showChar(std::string str, double str_d)
 {
 	std::cout << "char: ";
 
@@ -85,16 +85,16 @@ void	ScalarConverter::convert(std::string str)
 {
 	double str_d = std::strtod(str.c_str(), NULL);
 
-	try { checkChar(str, str_d); }
+	try { showChar(str, str_d); }
 	catch (std::exception &e) { std::cout << e.what() << std::endl; }
 	
-	try { checkInt(str_d); }
+	try { showInt(str_d); }
 	catch (std::exception &e) { std::cout << e.what() << std::endl; }
 
-	try { checkFloat(str_d); }
+	try { showFloat(str_d); }
 	catch (std::exception &e) { std::cout << e.what() << std::endl; }
 
-	try { checkDouble(str_d); }
+	try { showDouble(str_d); }
 	catch (std::exception &e) { std::cout << e.what() << std::endl; }
 
 	std::cout << std::endl;
