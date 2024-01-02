@@ -13,28 +13,23 @@ class ScalarConverter::ImpossibleException: public std::exception
 void	ScalarConverter::showDouble(double str_d)
 {
 	std::cout << "double: ";
-
 	if (std::isnan(str_d))
-		std::cout << "nan";
+		std::cout << "nan" << std::endl;
 	else if (std::isinf(str_d))
-		std::cout << ((str_d < 0) ? "-inf" : "+inf");
+		std::cout << ((str_d < 0) ? "-inf" : "+inf") << std::endl;
 	else
-		std::cout << std::fixed << std::setprecision(1) << static_cast<double>(str_d);
-
-	std::cout << std::endl;
+		std::cout << std::fixed << std::setprecision(1) << static_cast<double>(str_d) << std::endl;
 }
 
 void	ScalarConverter::showFloat(double str_d)
 {
 	std::cout << "float: ";
-
 	if (std::isnan(str_d))
-		std::cout << "nanf";
+		std::cout << "nanf" << std::endl;
 	else if (std::isinf(str_d))
-		std::cout << ((str_d < 0) ? "-inff" : "+inff");
+		std::cout << ((str_d < 0) ? "-inff" : "+inff") << std::endl;
 	else
-		std::cout << std::fixed << std::setprecision(1) << static_cast<float>(str_d) << "f";
-	std::cout << std::endl;
+		std::cout << std::fixed << std::setprecision(1) << static_cast<float>(str_d) << "f" << std::endl;
 }
 
 void	ScalarConverter::showInt(double str_d)
