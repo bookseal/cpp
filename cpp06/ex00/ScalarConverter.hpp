@@ -15,7 +15,7 @@ class ScalarConverter
 	public:
 		static void convert(std::string str);
 		class ImpossibleException;
-		static void checkChar(double str_d);
+		static void checkChar(std::string str, double str_d);
 		static void checkInt(double str_d);
 		static void checkFloat(double str_d);
 		static void checkDouble(double str_d);

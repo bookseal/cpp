@@ -6,7 +6,7 @@
 #    By: leegichan <leegichan@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/27 20:43:56 by gichlee           #+#    #+#              #
-#    Updated: 2023/12/11 01:11:22 by leegichan        ###   ########.fr        #
+#    Updated: 2024/01/02 16:49:16 by leegichan        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRCS		=	main.cpp \
 				ScalarConverter.cpp
 
 OBJS		= $(SRCS:%.cpp=%.o)
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+# CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 RM			+= -f
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
