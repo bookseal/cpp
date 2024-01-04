@@ -43,5 +43,13 @@ int main(void)
 		std::cout << "a = " << a << ", b = " << b << std::endl;
 		std::cout << "max = " << max(a, b) << std::endl;
 	}
+
+	{
+		pause("Test string max");
+		std::string a = "chaine1";
+		std::string b = "chaine2";
+		std::cout << "a = " << a << ", b = " << b << std::endl;
+		std::cout << "max = " << max(a, b) << std::endl;
+	}
 	return (0);
 }
