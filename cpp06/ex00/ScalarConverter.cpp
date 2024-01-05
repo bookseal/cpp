@@ -1,8 +1,32 @@
 #include "ScalarConverter.hpp"
 
-const char *ScalarConverter::ImpossibleException::what()
+const char *ScalarConverter::ImpossibleException::what() const throw()
 {
 	return ("impossible");
+}
+
+bool	ScalarConverter::isnan(double str_d)
+{
+	return (str_d != str_d);
+}
+
+bool ScalarConverter::isinf(double str_d) 
+{
+	std::uint64_t bits;
+	std::memcpy(&bits, &str_d, sizeof(str_d));
+
+	// Mask to extract exponent bits (11 bits) and check if they are all 1's
+	// and mantissa (fraction part) bits are all 0's
+	return (bits & 0x7FF0000000000000ULL) == 0x7FF0000000000000ULL && (bits & 0x000FFFFFFFFFFFFFULL) == 0;
+}
+
+bool ScalarConverter::isinf(float str_f) {
+	std::uint32_t bits;
+	std::memcpy(&bits, &str_f, sizeof(str_f));
+
+	// Mask to extract exponent bits (8 bits) and check if they are all 1's
+	// and mantissa (fraction part) bits are all 0's
+	return (bits & 0x7F800000U) == 0x7F800000U && (bits & 0x007FFFFFU) == 0;
 }
 
 void	ScalarConverter::showDouble(double str_d)

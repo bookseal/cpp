@@ -24,9 +24,8 @@ int main(void)
 	std::cout << "s2: " << data->s2 << std::endl;
 
 	pause("Press ENTER to serialize...");
-	Serializer serializer;
-	uintptr_t serialized = serializer.serialize(data);
-	Data* deserialized = serializer.deserialize(serialized);
+	uintptr_t serialized = Serializer::serialize(data);
+	Data* deserialized = Serializer::deserialize(serialized);
 
 	std::cout << "Data:" << std::endl;
 	std::cout << "s1: " << deserialized->s1 << std::endl;
