@@ -1,21 +1,16 @@
 #include "ScalarConverter.hpp"
 
-class ScalarConverter::ImpossibleException: public std::exception
+const char *ScalarConverter::ImpossibleException::what()
 {
-	public:
-		virtual const char* what() const throw()
-		{
-			return ("impossible");
-		}
-};
-
+	return ("impossible");
+}
 
 void	ScalarConverter::showDouble(double str_d)
 {
 	std::cout << "double: ";
-	if (std::isnan(str_d))
+	if (isnan(str_d))
 		std::cout << "nan" << std::endl;
-	else if (std::isinf(str_d))
+	else if (isinf(str_d))
 		std::cout << ((str_d < 0) ? "-inf" : "+inf") << std::endl;
 	else
 		std::cout << std::fixed << std::setprecision(1) << static_cast<double>(str_d) << std::endl;
@@ -24,9 +19,9 @@ void	ScalarConverter::showDouble(double str_d)
 void	ScalarConverter::showFloat(double str_d)
 {
 	std::cout << "float: ";
-	if (std::isnan(str_d))
+	if (isnan(str_d))
 		std::cout << "nanf" << std::endl;
-	else if (std::isinf(str_d))
+	else if (isinf(static_cast<float>(str_d)))
 		std::cout << ((str_d < 0) ? "-inff" : "+inff") << std::endl;
 	else
 		std::cout << std::fixed << std::setprecision(1) << static_cast<float>(str_d) << "f" << std::endl;
@@ -36,7 +31,7 @@ void	ScalarConverter::showInt(double str_d)
 {
 	std::cout << "int: ";
 
-	if (std::isnan(str_d) || std::isinf(str_d))
+	if (isnan(str_d) || isinf(str_d))
 		throw ScalarConverter::ImpossibleException();
 	else if (str_d < INT_MIN || str_d > INT_MAX)
 		throw ScalarConverter::ImpossibleException();
@@ -65,7 +60,7 @@ void	ScalarConverter::showChar(std::string str, double str_d)
 	{
 		char c = static_cast<char>(str_d);
 
-		if (std::isnan(str_d) || std::isinf(str_d))
+		if (isnan(str_d) || isinf(str_d))
 			throw ScalarConverter::ImpossibleException();
 		else if (str_d < 0 || str_d > 127)
 			throw ScalarConverter::ImpossibleException();
