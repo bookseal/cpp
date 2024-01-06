@@ -92,11 +92,13 @@ void	ScalarConverter::showFloat(float str_f)
 		std::cout << std::fixed << std::setprecision(1) << str_f << "f" << std::endl;
 }
 
-void	ScalarConverter::showInt(int str_i)
+void	ScalarConverter::showInt(int str_i, std::string str)
 {
 	std::cout << "int: ";
 
-	if (str_i < INT_MIN || str_i > INT_MAX)
+	if (std::strtod(str.c_str(), NULL) < INT_MIN || std::strtod(str.c_str(), NULL) > INT_MAX)
+		throw ScalarConverter::ImpossibleException();
+	else if (str_i < INT_MIN || str_i > INT_MAX)
 		throw ScalarConverter::ImpossibleException();
 	else
 		std::cout << str_i << std::endl;
@@ -151,11 +153,14 @@ Datatype ScalarConverter::detectAndConvert(const std::string& str, char& str_c, 
             str_d = static_cast<double>(str_c);
             break;
         case INT:
-            str_i = static_cast<int>(std::strtod(str.c_str(), NULL));
+		{
+			std::stringstream ss(str);
+			ss >> str_i;
             str_c = static_cast<char>(str_i);
             str_f = static_cast<float>(str_i);
             str_d = static_cast<double>(str_i);
             break;
+		}
         case FLOAT:
             str_f = static_cast<float>(std::strtod(str.c_str(), NULL));
             str_c = static_cast<char>(str_f);
@@ -178,8 +183,8 @@ void ScalarConverter::displayConvertedValues(const Datatype type, const std::str
     try { showChar(type, str_c, str, str_d); }
     catch (std::exception &e) { std::cout << e.what() << std::endl; }
     
-    // try { showInt(str_i); }
-    // catch (std::exception &e) { std::cout << e.what() << std::endl; }
+    try { showInt(str_i, str); }
+    catch (std::exception &e) { std::cout << e.what() << std::endl; }
 
     // try { showFloat(str_f); }
     // catch (std::exception &e) { std::cout << e.what() << std::endl; }

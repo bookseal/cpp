@@ -24,7 +24,7 @@ class ScalarConverter
 		static void		displayConvertedValues(const Datatype type, const std::string& str, char str_c, int str_i, float str_f, double str_d);
 
 		static void		showChar(const Datatype type, char str_c, std::string str, double str_d);
-		static void		showInt(int str_i);
+		static void		showInt(int str_i, std::string str);
 		static void		showFloat(float str_f);
 		static void		showDouble(double str_d);
 		
