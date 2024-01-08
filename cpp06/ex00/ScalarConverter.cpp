@@ -5,6 +5,11 @@ const char *ScalarConverter::ImpossibleException::what() const throw()
 	return ("impossible");
 }
 
+const char *ScalarConverter::OverflowException::what() const throw()
+{
+	return ("impossible");
+}
+
 bool	ScalarConverter::isnan(double str_d)
 {
 	return (str_d != str_d);
@@ -81,10 +86,12 @@ void	ScalarConverter::showDouble(double str_d)
 		std::cout << std::fixed << std::setprecision(1) << static_cast<double>(str_d) << std::endl;
 }
 
-void	ScalarConverter::showFloat(float str_f)
+void	ScalarConverter::showFloat(float str_f, bool isImpossible)
 {
 	std::cout << "float: ";
-	if (ScalarConverter::isnan(str_f))
+	if (isImpossible)
+		throw ScalarConverter::ImpossibleException();
+	else if (ScalarConverter::isnan(str_f))
 		std::cout << "nanf" << std::endl;
 	else if (ScalarConverter::isinf(str_f))
 		std::cout << ((str_f < 0) ? "-inff" : "+inff") << std::endl;
@@ -92,11 +99,13 @@ void	ScalarConverter::showFloat(float str_f)
 		std::cout << std::fixed << std::setprecision(1) << str_f << "f" << std::endl;
 }
 
-void	ScalarConverter::showInt(int str_i, std::string str)
+void	ScalarConverter::showInt(int str_i, std::string str, bool isImpossible)
 {
 	std::cout << "int: ";
 
-	if (std::strtod(str.c_str(), NULL) < INT_MIN || std::strtod(str.c_str(), NULL) > INT_MAX)
+	if (isImpossible)
+		throw ScalarConverter::ImpossibleException();
+	else if (std::strtod(str.c_str(), NULL) < INT_MIN || std::strtod(str.c_str(), NULL) > INT_MAX)
 		throw ScalarConverter::ImpossibleException();
 	else if (str_i < INT_MIN || str_i > INT_MAX)
 		throw ScalarConverter::ImpossibleException();
@@ -104,18 +113,20 @@ void	ScalarConverter::showInt(int str_i, std::string str)
 		std::cout << str_i << std::endl;
 }
 
-void	ScalarConverter::showChar(Datatype type, char str_c, std::string str, double str_d)
+void	ScalarConverter::showChar(Datatype type, char str_c, std::string str, double str_d, bool isImpossible)
 {
 	std::cout << "char: ";
 
-	if (type == DOUBLE && (isnan(str_d) || isinf(str_d)))
+	if (isImpossible)
+		throw ScalarConverter::ImpossibleException();
+	else if (type == DOUBLE && (isnan(str_d) || isinf(str_d)))
 		throw ScalarConverter::ImpossibleException();
 	else if (type == FLOAT && (isnan(static_cast<float>(str_d)) || isinf(static_cast<float>(str_d))))
 		throw ScalarConverter::ImpossibleException();
 	else if (str_c < 0 || str_c > 127)
 		throw ScalarConverter::ImpossibleException();
-	else if (type != CHAR && (str_c < 32 || str_c > 126))
-		throw ScalarConverter::ImpossibleException();
+	// else if (type != CHAR && (str_c < 32 || str_c > 126))
+	// 	throw ScalarConverter::ImpossibleException();
 	else if ((str_c < 32 || str_c > 126))
 		std::cout << "Non displayable" << std::endl;
 	else
@@ -130,21 +141,17 @@ Datatype	ScalarConverter::detectTypeOfStr(const std::string &str)
 		return DOUBLE;
 	if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
 		return CHAR;
-	if (str.find('.') == std::string::npos && str.find('f') == std::string::npos)
+	if (str.find('.') == std::string::npos)
 		return INT;
-	if (str.find('.') != std::string::npos && str.find('f') != std::string::npos)
+	if (str.find('.') != std::string::npos && str.find('f', str.length() - 1 ) != std::string::npos)
 		return FLOAT;
-	if (str.find('.') != std::string::npos && str.find('f') == std::string::npos)
+	if (str.find('.') != std::string::npos && str.find('f', str.length() - 1) == std::string::npos)
 		return DOUBLE;
 	return IMPOSSIBLE;
 }
 
-Datatype ScalarConverter::detectAndConvert(const std::string& str, char& str_c, int& str_i, float& str_f, double& str_d) {
+Datatype ScalarConverter::detectAndConvert(const std::string& str, char& str_c, int& str_i, float& str_f, double& str_d, bool isImpossible[4]) {
     Datatype type = ScalarConverter::detectTypeOfStr(str);
-    if (type == IMPOSSIBLE) {
-        throw ScalarConverter::ImpossibleException();
-    }
-
     switch (type) {
         case CHAR:
             str_c = str[1];
@@ -155,9 +162,14 @@ Datatype ScalarConverter::detectAndConvert(const std::string& str, char& str_c, 
         case INT:
 		{
 			std::stringstream ss(str);
+			if (ss.fail())
+				throw ScalarConverter::ImpossibleException();
 			ss >> str_i;
-            str_c = static_cast<char>(str_i);
+	        str_c = static_cast<char>(str_i);
             str_f = static_cast<float>(str_i);
+			std::cout << "str_f = " << static_cast<int>(str_f) << std::endl;
+			if (str_i != static_cast<int>(str_f))
+				isImpossible[FLOAT] = true;
             str_d = static_cast<double>(str_i);
             break;
 		}
@@ -179,29 +191,45 @@ Datatype ScalarConverter::detectAndConvert(const std::string& str, char& str_c, 
 	return type;
 }
 
-void ScalarConverter::displayConvertedValues(const Datatype type, const std::string& str, char str_c, int str_i, float str_f, double str_d) {
-    try { showChar(type, str_c, str, str_d); }
+void ScalarConverter::displayConvertedValues(const Datatype type, const std::string& str, char str_c, int str_i, float str_f, double str_d, bool isImpossible[4]) {
+    try { showChar(type, str_c, str, str_d, isImpossible[CHAR]); }
     catch (std::exception &e) { std::cout << e.what() << std::endl; }
     
-    try { showInt(str_i, str); }
+    try { showInt(str_i, str, isImpossible[INT]); }
     catch (std::exception &e) { std::cout << e.what() << std::endl; }
 
-    // try { showFloat(str_f); }
-    // catch (std::exception &e) { std::cout << e.what() << std::endl; }
+    try { showFloat(str_f, isImpossible[FLOAT]); }
+    catch (std::exception &e) { std::cout << e.what() << std::endl; }
 
-    // try { showDouble(str_d); }
-    // catch (std::exception &e) { std::cout << e.what() << std::endl; }
+    try { showDouble(str_d); }
+    catch (std::exception &e) { std::cout << e.what() << std::endl; }
 
     std::cout << std::endl;
 }
 
 void	ScalarConverter::convert(std::string str)
 {
-	char str_c;
-    int str_i;
-    float str_f;
-    double str_d;
+	bool	isImpossible[4] = {false, false, false, false};
+	char	str_c;
+    int		str_i;
+    float	str_f;
+    double	str_d;
 
-    Datatype type = detectAndConvert(str, str_c, str_i, str_f, str_d);
-    displayConvertedValues(type, str, str_c, str_i, str_f, str_d);
+	try
+	{
+	    Datatype type = detectAndConvert(str, str_c, str_i, str_f, str_d, isImpossible);
+	    displayConvertedValues(type, str, str_c, str_i, str_f, str_d, isImpossible);
+	}
+	catch(const ScalarConverter::OverflowException& e)
+	{
+		std::cout << std::endl;
+		std::cout << "char : impossible" << std::endl;
+		std::cout << "int : impossible" << std::endl;
+		std::cout << "float : impossible" << std::endl;
+		std::cout << "double : impossible" << std::endl;
+	}
+	catch(const ScalarConverter::ImpossibleException& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 };
