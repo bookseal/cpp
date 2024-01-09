@@ -5,6 +5,8 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
+#include <cmath>
+#include <limits>
 
 enum Datatype
 	{
@@ -36,6 +38,18 @@ class ScalarConverter
 		
 		static bool		isExponentAllOnes(const char* bits, int startByte, int startBit, int numBits);
 		static bool		isMantissaAllZeros(const char* bits, int numBits);
+
+		static bool		isIntOverflow(const std::string& str);
+		static bool		isFloatOverflow(const std::string& str);
+		static bool		isDoubleOverflow(const std::string& str);
+		
+		static bool		isIntToFloatPrecisionLoss(int originalInt);
+		static bool		isIntToDoublePrecisionLoss(int originalInt);
+		static bool		isFloatToIntPrecisionLoss(float originalFloat);
+		static bool		isFloatToDoublePrecisionLoss(float originalFloat);
+		static bool		isDoubleToIntPrecisionLoss(double originalDouble);
+		static bool		isDoubleToFloatPrecisionLoss(double originalDouble);
+
 		class 			ImpossibleException: public std::exception
 		{
 			public:
