@@ -112,7 +112,7 @@ void	ScalarConverter::showInt(int str_i, std::string str, bool isImpossible)
 		std::cout << str_i << std::endl;
 }
 
-void	ScalarConverter::showChar(Datatype type, char str_c, std::string str, double str_d, bool isImpossible)
+void	ScalarConverter::showChar(Datatype type, char str_c, double str_d, bool isImpossible)
 {
 	std::cout << "char: ";
 
@@ -131,7 +131,7 @@ void	ScalarConverter::showChar(Datatype type, char str_c, std::string str, doubl
 }
 
 void ScalarConverter::displayConvertedValues(const Datatype type, const std::string& str, char str_c, int str_i, float str_f, double str_d, bool isImpossible[4]) {
-	try { showChar(type, str_c, str, str_d, isImpossible[CHAR]); }
+	try { showChar(type, str_c, str_d, isImpossible[CHAR]); }
 	catch (std::exception &e) { std::cout << e.what() << std::endl; }
 		
 	try { showInt(str_i, str, isImpossible[INT]); }
@@ -159,16 +159,6 @@ bool ScalarConverter::isFloatToIntPrecisionLoss(float originalFloat) {
 	int convertedInt = static_cast<int>(originalFloat);
 
 	if (convertedInt != originalFloat) {
-		return true;
-	}
-
-	return false;
-}
-
-bool ScalarConverter::isFloatToDoublePrecisionLoss(float originalFloat) {
-	double convertedDouble = static_cast<double>(originalFloat);
-
-	if (convertedDouble != originalFloat) {
 		return true;
 	}
 
@@ -280,10 +270,7 @@ Datatype ScalarConverter::detectAndConvert(const std::string& str, char& str_c, 
 				isImpossible[INT] = true;
 			else
 				str_i = static_cast<int>(str_f);
-			if (isFloatToDoublePrecisionLoss(str_f))
-				isImpossible[DOUBLE] = true;
-			else
-				str_d = static_cast<double>(str_f);
+			str_d = static_cast<double>(str_f);
 			break;
 		}
 		case DOUBLE:

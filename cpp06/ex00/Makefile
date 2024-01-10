@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leegichan <leegichan@student.42.fr>        +#+  +:+       +#+         #
+#    By: gichlee <gichlee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/27 20:43:56 by gichlee           #+#    #+#              #
-#    Updated: 2024/01/06 19:44:10 by leegichan        ###   ########.fr        #
+#    Updated: 2024/01/10 12:59:51 by gichlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ SRCS		=	main.cpp \
 				ScalarConverter.cpp
 
 OBJS		= $(SRCS:%.cpp=%.o)
-# CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
-CXXFLAGS	+= -g
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+# CXXFLAGS	+= -g
 
 RM			+= -f
 %.o: %.cpp

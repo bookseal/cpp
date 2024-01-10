@@ -25,7 +25,7 @@ class ScalarConverter
 		static Datatype detectAndConvert(const std::string& str, char& str_c, int& str_i, float& str_f, double& str_d, bool isImpossible[4]);
 		static void		displayConvertedValues(const Datatype type, const std::string& str, char str_c, int str_i, float str_f, double str_d, bool isImpossible[4]);
 
-		static void		showChar(const Datatype type, char str_c, std::string str, double str_d, bool isImpossible);
+		static void		showChar(const Datatype type, char str_c, double str_d, bool isImpossible);
 		static void		showInt(int str_i, std::string str, bool isImpossible);
 		static void		showFloat(float str_f, bool isImpossible);
 		static void		showDouble(double str_d);
@@ -46,7 +46,6 @@ class ScalarConverter
 		static bool		isIntToFloatPrecisionLoss(int originalInt);
 		static bool		isIntToDoublePrecisionLoss(int originalInt);
 		static bool		isFloatToIntPrecisionLoss(float originalFloat);
-		static bool		isFloatToDoublePrecisionLoss(float originalFloat);
 		static bool		isDoubleToIntPrecisionLoss(double originalDouble);
 		static bool		isDoubleToFloatPrecisionLoss(double originalDouble);
 
