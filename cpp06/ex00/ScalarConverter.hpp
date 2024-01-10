@@ -7,6 +7,10 @@
 #include <sstream>
 #include <cmath>
 #include <limits>
+#include <cstring>
+#include <cstdlib>
+#include <climits>
+#include <cfloat>
 
 enum Datatype
 	{

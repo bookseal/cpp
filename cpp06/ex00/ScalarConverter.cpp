@@ -56,7 +56,7 @@ bool ScalarConverter::isMantissaAllZeros(const char* bits, int numBits) {
 
 bool ScalarConverter::isinf(double str_d) {
 	char bits[sizeof(str_d)];
-	std::memcpy(bits, &str_d, sizeof(str_d));
+	memcpy(bits, &str_d, sizeof(str_d));
 
 	bool exponentAllOnes = isExponentAllOnes(bits, 7, 0, 11);
 	bool mantissaAllZeros = isMantissaAllZeros(bits, 52);
@@ -66,7 +66,7 @@ bool ScalarConverter::isinf(double str_d) {
 
 bool ScalarConverter::isinf(float str_f) {
 	char bits[sizeof(str_f)];
-	std::memcpy(bits, &str_f, sizeof(str_f));
+	memcpy(bits, &str_f, sizeof(str_f));
 
 	bool exponentAllOnes = isExponentAllOnes(bits, 3, 1, 8);
 	bool mantissaAllZeros = isMantissaAllZeros(bits, 23);
@@ -76,7 +76,7 @@ bool ScalarConverter::isinf(float str_f) {
 
 void	ScalarConverter::showDouble(double str_d)
 {
-	std::cout << "double: ";
+	std::cout << "double : ";
 	if (ScalarConverter::isnan(str_d))
 		std::cout << "nan" << std::endl;
 	else if (ScalarConverter::isinf(str_d))
@@ -87,7 +87,7 @@ void	ScalarConverter::showDouble(double str_d)
 
 void	ScalarConverter::showFloat(float str_f, bool isImpossible)
 {
-	std::cout << "float: ";
+	std::cout << "float  : ";
 	if (isImpossible)
 		std::cout << "impossible" << std::endl;
 	else if (ScalarConverter::isnan(str_f))
@@ -100,7 +100,7 @@ void	ScalarConverter::showFloat(float str_f, bool isImpossible)
 
 void	ScalarConverter::showInt(int str_i, std::string str, bool isImpossible)
 {
-	std::cout << "int: ";
+	std::cout << "int    : ";
 
 	if (isImpossible)
 		std::cout << "impossible" << std::endl;
@@ -114,15 +114,13 @@ void	ScalarConverter::showInt(int str_i, std::string str, bool isImpossible)
 
 void	ScalarConverter::showChar(Datatype type, char str_c, double str_d, bool isImpossible)
 {
-	std::cout << "char: ";
+	std::cout << "char   : ";
 
 	if (isImpossible)
 		std::cout << "impossible" << std::endl;
 	else if (type == DOUBLE && (isnan(str_d) || isinf(str_d)))
 		std::cout << "impossible" << std::endl;
 	else if (type == FLOAT && (isnan(static_cast<float>(str_d)) || isinf(static_cast<float>(str_d))))
-		std::cout << "impossible" << std::endl;
-	else if (str_c < 0 || str_c > 127)
 		std::cout << "impossible" << std::endl;
 	else if ((str_c < 32 || str_c > 126))
 		std::cout << "Non displayable" << std::endl;
@@ -201,7 +199,7 @@ bool ScalarConverter::isFloatOverflow(const std::string& str) {
 	float value;
 	ss >> value;
 
-	if (value > std::numeric_limits<float>::max() || value < std::numeric_limits<float>::lowest()) {
+	if (value > FLT_MAX || value < FLT_MIN) {
 		return true;
 	}
 	return false;
@@ -212,7 +210,7 @@ bool ScalarConverter::isDoubleOverflow(const std::string& str) {
 	double value;
 	ss >> value;
 
-	if (value > std::numeric_limits<double>::max() || value < std::numeric_limits<double>::lowest()) {
+	if (value > DBL_MAX || value < DBL_MIN) {
 		return true;
 	}
 	return false;
@@ -264,7 +262,7 @@ Datatype ScalarConverter::detectAndConvert(const std::string& str, char& str_c, 
 		{
 			if (isFloatOverflow(str))
 				throw ScalarConverter::OverflowException();
-			str_f = std::strtof(str.c_str(), NULL);
+			str_f = strtof(str.c_str(), NULL);
 			str_c = static_cast<char>(str_f);
 			if (isFloatToIntPrecisionLoss(str_f))
 				isImpossible[INT] = true;
@@ -277,7 +275,7 @@ Datatype ScalarConverter::detectAndConvert(const std::string& str, char& str_c, 
 		{
 			if (isDoubleOverflow(str))
 				throw ScalarConverter::OverflowException();
-			str_d = std::strtod(str.c_str(), NULL);
+			str_d = strtod(str.c_str(), NULL);
 			str_c = static_cast<char>(str_d);
 			if (isDoubleToIntPrecisionLoss(str_d))
 				isImpossible[INT] = true;
@@ -310,9 +308,9 @@ void	ScalarConverter::convert(std::string str)
 	}
 	catch(const ScalarConverter::OverflowException& e)
 	{
-		std::cout << "char : impossible" << std::endl;
-		std::cout << "int : impossible" << std::endl;
-		std::cout << "float : impossible" << std::endl;
+		std::cout << "cha    : impossible" << std::endl;
+		std::cout << "int    : impossible" << std::endl;
+		std::cout << "float  : impossible" << std::endl;
 		std::cout << "double : impossible" << std::endl;
 		std::cout << std::endl;
 	}
