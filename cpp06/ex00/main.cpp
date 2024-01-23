@@ -38,7 +38,7 @@ int main(void)
 		{
 			pause("Test 3: int");
 			std::string str[] = {"25", "2147483646", "2147483647", "-2147483648", "2147483648", "-2147483649", "2147483647.0f", "2147483648.0f"};
-			for (int i = 6; i < 8; i++) {
+			for (int i = 0; i < 8; i++) {
 				std::cout << "str[" << i << "] = " << str[i] << std::endl;
 				ScalarConverter::convert(str[i]);
 			}
