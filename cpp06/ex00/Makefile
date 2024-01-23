@@ -3,20 +3,22 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gichlee <gichlee@student.42.fr>            +#+  +:+       +#+         #
+#    By: leegichan <leegichan@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/27 20:43:56 by gichlee           #+#    #+#              #
-#    Updated: 2024/01/10 12:59:51 by gichlee          ###   ########.fr        #
+#    Updated: 2024/01/15 21:48:08 by leegichan        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= a.out
 SRCS		=	main.cpp \
-				ScalarConverter.cpp
+				ScalarConverter.cpp \
+				DetectAndConvert.cpp \
+				DisplayConvertedValues.cpp \
 
 OBJS		= $(SRCS:%.cpp=%.o)
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
-# CXXFLAGS	+= -g
+# CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS	+= -g3
 
 RM			+= -f
 %.o: %.cpp

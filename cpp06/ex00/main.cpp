@@ -16,7 +16,7 @@ int main(void)
 {
 	try {
 		{
-			pause("Test 1: PDF");
+			// pause("Test 1: PDF");
 			std::string str[] = {"0", "nan", "42.0f"};
 			for (int i = 0; i < 3; i++)
 			{
@@ -27,7 +27,7 @@ int main(void)
 		
 		{
 			pause("Test 2: char");
-			std::string str[] = {"'a'", "48", "65", "42.0f"};
+			std::string str[] = {"'a'", "48", "65", "42.5f"};
 			for (int i = 0; i < 4; i++)
 			{
 				std::cout << "str[" << i << "] = " << str[i] << std::endl;

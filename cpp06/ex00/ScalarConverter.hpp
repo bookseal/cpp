@@ -1,69 +1,20 @@
 #ifndef SCALARCONVERTER_HPP
 #define SCALARCONVERTER_HPP
 
-#include <string>
+#include "DetectAndConvert.hpp"
+#include "DisplayConvertedValues.hpp"
 #include <iostream>
-#include <iomanip>
-#include <sstream>
-#include <cmath>
-#include <limits>
-#include <cstring>
-#include <cstdlib>
-#include <climits>
-#include <cfloat>
-
-enum Datatype
-	{
-		CHAR,
-		INT,
-		FLOAT,
-		DOUBLE,
-		IMPOSSIBLE
-	};
+#include <string>
 
 class ScalarConverter
 {
+	private:
+		ScalarConverter();
+		ScalarConverter(const ScalarConverter& other);
+		ScalarConverter& operator=(const ScalarConverter& other);
+		~ScalarConverter();
 	public:
 		static void		convert(std::string str);
-		static Datatype detectTypeOfStr(const std::string &str);
-		static Datatype detectAndConvert(const std::string& str, char& str_c, int& str_i, float& str_f, double& str_d, bool isImpossible[4]);
-		static void		displayConvertedValues(const Datatype type, const std::string& str, char str_c, int str_i, float str_f, double str_d, bool isImpossible[4]);
-
-		static void		showChar(const Datatype type, char str_c, double str_d, bool isImpossible);
-		static void		showInt(int str_i, std::string str, bool isImpossible);
-		static void		showFloat(float str_f, bool isImpossible);
-		static void		showDouble(double str_d);
-		
-		static bool		isnan(float str_f);
-		static bool		isnan(double str_d);
-		
-		static bool		isinf(float str_f);
-		static bool		isinf(double str_d);
-		
-		static bool		isExponentAllOnes(const char* bits, int startByte, int startBit, int numBits);
-		static bool		isMantissaAllZeros(const char* bits, int numBits);
-
-		static bool		isIntOverflow(const std::string& str);
-		static bool		isFloatOverflow(const std::string& str);
-		static bool		isDoubleOverflow(const std::string& str);
-		
-		static bool		isIntToFloatPrecisionLoss(int originalInt);
-		static bool		isIntToDoublePrecisionLoss(int originalInt);
-		static bool		isFloatToIntPrecisionLoss(float originalFloat);
-		static bool		isDoubleToIntPrecisionLoss(double originalDouble);
-		static bool		isDoubleToFloatPrecisionLoss(double originalDouble);
-
-		class 			ImpossibleException: public std::exception
-		{
-			public:
-				virtual const char* what() const throw();
-		};
-		class			OverflowException: public std::exception
-		{
-			public:
-				virtual const char* what() const throw();
-		};
 };
-
 
 #endif
