@@ -12,6 +12,7 @@
 #include <cstdlib>
 #include <climits>
 #include <cfloat>
+#include <cerrno>
 
 
 #define	CHAR 0

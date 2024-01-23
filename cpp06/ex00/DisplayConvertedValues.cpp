@@ -5,16 +5,13 @@ void	DisplayConvertedValues::showDouble(double str_d)
 	std::cout << std::fixed << std::setprecision(1) << str_d << std::endl;
 }
 
-void	DisplayConvertedValues::showFloat(float str_f, bool isImpossible)
+void	DisplayConvertedValues::showFloat(float str_f)
 {
 	std::cout << std::fixed << std::setprecision(1) << str_f;
-	if (isImpossible)
-		std::cout << "f" << std::endl;
-	else
-		std::cout << "f" << std::endl;
+	std::cout << "f" << std::endl;
 }
 
-void	DisplayConvertedValues::showInt(int str_i, std::string str, bool isImpossible)
+void	DisplayConvertedValues::showInt(int str_i, std::string str)
 {
 	if (std::strtod(str.c_str(), NULL) < INT_MIN || std::strtod(str.c_str(), NULL) > INT_MAX)
 		std::cout << "impossible" << std::endl;
@@ -49,7 +46,7 @@ void	DisplayConvertedValues::displayConvertedValues(std::string &str, char str_c
 		if (isImpossible[INT])
 			throw DetectAndConvert::ImpossibleException();
 		else
-			showInt(str_i, str, isImpossible[INT]);
+			showInt(str_i, str);
 	}
 	catch (std::exception &e) { std::cout << e.what() << std::endl; }
 
@@ -58,7 +55,7 @@ void	DisplayConvertedValues::displayConvertedValues(std::string &str, char str_c
 		if (isImpossible[FLOAT])
 			throw DetectAndConvert::ImpossibleException();
 		else
-			showFloat(str_f, isImpossible[FLOAT]);
+			showFloat(str_f);
 	}
 	catch (std::exception &e) { std::cout << e.what() << std::endl; }
 

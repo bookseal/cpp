@@ -16,8 +16,8 @@ class DisplayConvertedValues
 		static void		displayConvertedValues(std::string &str, char str_c, int str_i, float str_f, double str_d, bool isImpossible[4]);
 		
 		static void		showChar(char str_c);
-		static void		showInt(int str_i, std::string str, bool isImpossible);
-		static void		showFloat(float str_f, bool isImpossible);
+		static void		showInt(int str_i, std::string str);
+		static void		showFloat(float str_f);
 		static void		showDouble(double str_d);		
 };
 #endif

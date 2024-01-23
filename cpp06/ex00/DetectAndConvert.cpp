@@ -133,7 +133,7 @@ void DetectAndConvert::detectAndConvert(const std::string& str)
 	isImpossible[FLOAT] = false;
 	isImpossible[DOUBLE] = false;
 	
-	if (str.length() == 1 && !isdigit(str[0]) || str.length() == 3 && str[0] == '\'' && str[2] == '\'')
+	if ((str.length() == 1 && !isdigit(str[0])) || (str.length() == 3 && str[0] == '\'' && str[2] == '\''))
 		convertChar(str);
 	else if (str == "-inff" || str == "+inff" || str == "nanf")
 		convertFloat(str);
@@ -144,8 +144,8 @@ void DetectAndConvert::detectAndConvert(const std::string& str)
 	else if (str.length() > 1 && str.find('.', 0) != std::string::npos && str[str.length() - 1] == 'f')
 		convertFloat(str);
 	else if ((str.length() == 1 && isdigit(str[0])) || \
-	(str.length() > 1 && str[0] == '-' && isdigit(str[1]) || \
-	str.length() > 1 && isdigit(str[0])))
+	(str.length() > 1 && str[0] == '-' && isdigit(str[1])) || \
+	(str.length() > 1 && isdigit(str[0])))
 		convertInt(str);
 	else
 		throw ImpossibleException();
