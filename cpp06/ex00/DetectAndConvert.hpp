@@ -14,7 +14,6 @@
 #include <cfloat>
 #include <cerrno>
 
-
 #define	CHAR 0
 #define INT 1
 #define FLOAT 2
@@ -35,27 +34,14 @@ class DetectAndConvert
 		static bool		isImpossible[4];
 
 		static void		 detectAndConvert(const std::string& str);
-		
 		static void		convertChar(const std::string& str);
 		static void		convertInt(const std::string& str);
 		static void		convertFloat(const std::string& str);
 		static void		convertDouble(const std::string& str);
-
 		static bool		isnan(float str_f);
 		static bool		isnan(double str_d);
-		
-		// static bool		isinf(float str_f);
-		// static bool		isinf(double str_d);
-		
-		// static bool		isExponentAllOnes(const char* bits, int startByte, int startBit, int numBits);
-		// static bool		isMantissaAllZeros(const char* bits, int numBits);
-
 		static bool		isIntOverflow(const std::string& str);
 		
-		static bool		isFloatToIntPrecisionLoss(float originalFloat);
-		static bool		isDoubleToIntPrecisionLoss(double originalDouble);
-		static bool		isDoubleToFloatPrecisionLoss(double originalDouble);
-
 		static class	OverflowException : public std::exception {
 			public:
 				virtual const char* what() const throw();
@@ -63,7 +49,7 @@ class DetectAndConvert
 		static class  ImpossibleException : public std::exception {
 			public:
 				virtual const char* what() const throw();
-		} impossibleException;		
+		} impossibleException;
 };
 
 #endif

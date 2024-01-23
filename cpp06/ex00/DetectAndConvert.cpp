@@ -89,6 +89,8 @@ void	DetectAndConvert::convertFloat(const std::string& str)
 	{
 		converted_char = static_cast<char>(converted_float);
 		converted_int = static_cast<int>(converted_float);
+		if (converted_int != converted_float)
+			isImpossible[INT] = true;
 		converted_double = static_cast<double>(converted_float);
 	}
 }
@@ -122,6 +124,8 @@ void	DetectAndConvert::convertDouble(const std::string& str)
 	{
 		converted_char = static_cast<char>(converted_double);
 		converted_int = static_cast<int>(converted_double);
+		if (converted_int != converted_double)
+			isImpossible[INT] = true;
 		converted_float = static_cast<float>(converted_double);
 	}
 }
@@ -150,40 +154,3 @@ void DetectAndConvert::detectAndConvert(const std::string& str)
 	else
 		throw ImpossibleException();
 }
-
-
-// bool DetectAndConvert::isExponentAllOnes(const char* bits, int startByte, int startBit, int numBits)
-// {
-// 	bool allOnes = true;
-// 	int bitCount = 0;
-
-// 	for (int byteIndex = startByte; byteIndex >= 0 && bitCount < numBits; byteIndex--) {
-// 		int startBitInByte = (byteIndex == startByte) ? startBit : 7;
-// 		for (int bitIndex = startBitInByte; bitIndex >= 0 && bitCount < numBits; bitIndex--) {
-// 			if ((bits[byteIndex] & (1 << bitIndex)) == 0) {
-// 				allOnes = false;
-// 				break;
-// 			}
-// 			bitCount++;
-// 		}
-// 		if (!allOnes) break;
-// 	}
-
-// 	return allOnes;
-// }
-
-// bool DetectAndConvert::isMantissaAllZeros(const char* bits, int numBits)
-// {
-// 	bool allZeros = true;
-
-// 	for (int i = 0; i < numBits; ++i) {
-// 		int byteIndex = i / 8;
-// 		int bitIndex = i % 8;
-// 		if ((bits[byteIndex] & (1 << bitIndex)) != 0) {
-// 			allZeros = false;
-// 			break;
-// 		}
-// 	}
-
-// 	return allZeros;
-// }

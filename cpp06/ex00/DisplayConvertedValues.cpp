@@ -14,9 +14,9 @@ void	DisplayConvertedValues::showFloat(float str_f)
 void	DisplayConvertedValues::showInt(int str_i, std::string str)
 {
 	if (std::strtod(str.c_str(), NULL) < INT_MIN || std::strtod(str.c_str(), NULL) > INT_MAX)
-		std::cout << "impossible" << std::endl;
+		throw DetectAndConvert::ImpossibleException();
 	else if (str_i < INT_MIN || str_i > INT_MAX)
-		std::cout << "impossible" << std::endl;
+		throw DetectAndConvert::ImpossibleException();
 	else
 		std::cout << str_i << std::endl;
 }
