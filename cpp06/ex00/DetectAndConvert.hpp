@@ -33,7 +33,7 @@ class DetectAndConvert
 		static double	converted_double;
 		static bool		isImpossible[4];
 
-		static void		 detectAndConvert(const std::string& str);
+		static void		detectAndConvert(const std::string& str);
 		static void		convertChar(const std::string& str);
 		static void		convertInt(const std::string& str);
 		static void		convertFloat(const std::string& str);
@@ -41,15 +41,17 @@ class DetectAndConvert
 		static bool		isnan(float str_f);
 		static bool		isnan(double str_d);
 		static bool		isIntOverflow(const std::string& str);
+		static bool		isCharOverflow(int nb);
 		
-		static class	OverflowException : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		} overflowException;
-		static class  ImpossibleException : public std::exception {
-			public:
-				virtual const char* what() const throw();
-		} impossibleException;
+		static bool		isChar(const std::string& str);
+		static bool		isDouble(const std::string& str);
+		static bool		isFloat(const std::string& str);
+		static bool		isInt(const std::string& str);
+		static bool		isInteger(float nb);
+		static bool		isInteger(double nb);
+		static bool		isFloatOverflow(double nb);
+
+		static void		all_impossible();
 };
 
 #endif

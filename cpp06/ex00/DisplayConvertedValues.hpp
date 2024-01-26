@@ -18,5 +18,6 @@ class DisplayConvertedValues
 		static void		showInt(int str_i, std::string str);
 		static void		showFloat(float str_f);
 		static void		showDouble(double str_d);
+		static void		printImpossible();
 };
 #endif

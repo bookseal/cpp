@@ -12,7 +12,7 @@ void pause(std::string msg)
 	std::cin.get();
 }
 
-int main(void)
+void test_default()
 {
 	try {
 		{
@@ -68,5 +68,14 @@ int main(void)
 	{
 		std::cout << e.what() << std::endl;
 	}
+
+}
+
+int main(int argc, char **argv)
+{
+	if (argc == 1)
+		test_default();
+	else
+		ScalarConverter::convert(argv[1]);
 	return (0);
 }

@@ -5,14 +5,12 @@ DetectAndConvert::DetectAndConvert(const DetectAndConvert& other) { (void)other;
 DetectAndConvert& DetectAndConvert::operator=(const DetectAndConvert& other) { (void)other; return *this; }
 DetectAndConvert::~DetectAndConvert() {}
 
-const char* DetectAndConvert::OverflowException::what() const throw()
+void	DetectAndConvert::all_impossible()
 {
-	return "OverflowException";
-}
-
-const char* DetectAndConvert::ImpossibleException::what() const throw()
-{
-	return "Impossible";
+	isImpossible[CHAR] = true;
+	isImpossible[INT] = true;
+	isImpossible[FLOAT] = true;
+	isImpossible[DOUBLE] = true;
 }
 
 void	DetectAndConvert::convertChar(const std::string& str)
@@ -22,7 +20,10 @@ void	DetectAndConvert::convertChar(const std::string& str)
 	else if (str.length() == 1 && !isdigit(str[0]))
 		converted_char = str[0];
 	else
-		throw ImpossibleException();
+	{
+		all_impossible();
+		return ;
+	}
 	converted_int = static_cast<int>(converted_char);
 	converted_float = static_cast<float>(converted_char);
 	converted_double = static_cast<double>(converted_char);
@@ -45,19 +46,29 @@ bool	DetectAndConvert::isIntOverflow(const std::string& str)
 	return false;
 }
 
+bool	DetectAndConvert::isCharOverflow(int nb)
+{
+	if (nb < -128 || nb > 127)
+		return true;
+	return false;
+}
+
 void	DetectAndConvert::convertInt(const std::string& str)
 {
 	std::istringstream ss(str);
 
 	ss >> converted_int;
-	if (isIntOverflow(str) || ss.fail())
-		throw OverflowException();
-	else
+	if (errno == ERANGE || isIntOverflow(str))
 	{
-		converted_char = static_cast<char>(converted_int);
-		converted_float = static_cast<float>(converted_int);
-		converted_double = static_cast<double>(converted_int);
+		all_impossible();
+		return ;
 	}
+	if (isCharOverflow(converted_int))
+		isImpossible[CHAR] = true;
+	else
+		converted_char = static_cast<char>(converted_int);
+	converted_float = static_cast<float>(converted_int);
+	converted_double = static_cast<double>(converted_int);
 }
 
 bool	DetectAndConvert::isnan(float nb)
@@ -65,13 +76,21 @@ bool	DetectAndConvert::isnan(float nb)
 	return nb != nb;
 }
 
+bool	DetectAndConvert::isInteger(float nb)
+{
+	return nb == static_cast<int>(nb);
+}
+
 void	DetectAndConvert::convertFloat(const std::string& str)
 {
 	errno = 0;
 	converted_float = strtof(str.c_str(), NULL);
 	if (errno == ERANGE)
-		throw OverflowException();
-	if (str == "nanf" || isnan(converted_float))
+	{
+		all_impossible();
+		return ;
+	}
+	else if (str == "nanf" || isnan(converted_float))
 	{
 		isImpossible[CHAR] = true;
 		isImpossible[INT] = true;
@@ -87,11 +106,13 @@ void	DetectAndConvert::convertFloat(const std::string& str)
 	}
 	else
 	{
-		converted_char = static_cast<char>(converted_float);
 		converted_int = static_cast<int>(converted_float);
+		converted_char = static_cast<char>(converted_float);
+		converted_double = static_cast<double>(converted_float);
+		if (isCharOverflow(converted_float) || !isInteger(converted_float))
+			isImpossible[CHAR] = true;
 		if (converted_int != converted_float)
 			isImpossible[INT] = true;
-		converted_double = static_cast<double>(converted_float);
 	}
 }
 
@@ -100,13 +121,26 @@ bool DetectAndConvert::isnan(double number)
 	return number != number;
 }
 
+bool DetectAndConvert::isInteger(double number)
+{
+	return number == static_cast<int>(number);
+}
+
+bool DetectAndConvert::isFloatOverflow(double number)
+{
+	return number < -FLT_MAX || number > FLT_MAX;
+}
+
 void	DetectAndConvert::convertDouble(const std::string& str)
 {
 	errno = 0;
 	converted_double = strtod(str.c_str(), NULL);
 	if (errno == ERANGE)
-		throw OverflowException();
-	if (str == "nan")
+	{
+		all_impossible();
+		return ;
+	}
+	else if (str == "nan")
 	{
 		isImpossible[CHAR] = true;
 		isImpossible[INT] = true;
@@ -124,10 +158,52 @@ void	DetectAndConvert::convertDouble(const std::string& str)
 	{
 		converted_char = static_cast<char>(converted_double);
 		converted_int = static_cast<int>(converted_double);
+		converted_float = static_cast<float>(converted_double);
+		if (isCharOverflow(converted_int) || !isInteger(converted_double))
+			isImpossible[CHAR] = true;
 		if (converted_int != converted_double)
 			isImpossible[INT] = true;
-		converted_float = static_cast<float>(converted_double);
+		if (isFloatOverflow(converted_double))
+			isImpossible[FLOAT] = true;
 	}
+}
+
+bool DetectAndConvert::isChar(const std::string& str)
+{
+	if (str.length() == 3 && str[0] == '\'' && str[2] == '\'')
+		return true;
+	else if (str.length() == 1 && !isdigit(str[0]))
+		return true;
+	return false;
+}
+
+bool DetectAndConvert::isDouble(const std::string& str)
+{
+	if (str == "-inf" || str == "+inf" || str == "nan")
+		return true;
+	else if (str.length() > 1 && str.find('.', 0) != std::string::npos && str[str.length() - 1] != 'f')
+		return true;
+	else if (str.length() > 1 && str.find('.', 0) != std::string::npos && str[str.length() - 1] == 'f')
+		return false;
+	return false;
+}
+
+bool DetectAndConvert::isFloat(const std::string& str)
+{
+	if (str == "-inff" || str == "+inff" || str == "nanf")
+		return true;
+	else if (str.length() > 1 && str.find('.', 0) != std::string::npos && str[str.length() - 1] == 'f')
+		return true;
+	return false;
+}
+
+bool DetectAndConvert::isInt(const std::string& str)
+{
+	if ((str.length() == 1 && isdigit(str[0])) || \
+	(str.length() > 1 && str[0] == '-' && isdigit(str[1])) || \
+	(str.length() > 1 && isdigit(str[0])))
+		return true;
+	return false;
 }
 
 void DetectAndConvert::detectAndConvert(const std::string& str)
@@ -137,20 +213,14 @@ void DetectAndConvert::detectAndConvert(const std::string& str)
 	isImpossible[FLOAT] = false;
 	isImpossible[DOUBLE] = false;
 	
-	if ((str.length() == 1 && !isdigit(str[0])) || (str.length() == 3 && str[0] == '\'' && str[2] == '\''))
+	if (isChar(str))
 		convertChar(str);
-	else if (str == "-inff" || str == "+inff" || str == "nanf")
+	else if (isFloat(str))
 		convertFloat(str);
-	else if (str == "-inf" || str == "+inf" || str == "nan")
+	else if (isDouble(str))
 		convertDouble(str);
-	else if (str.length() > 1 && str.find('.', 0) != std::string::npos && str[str.length() - 1] != 'f')
-		convertDouble(str);
-	else if (str.length() > 1 && str.find('.', 0) != std::string::npos && str[str.length() - 1] == 'f')
-		convertFloat(str);
-	else if ((str.length() == 1 && isdigit(str[0])) || \
-	(str.length() > 1 && str[0] == '-' && isdigit(str[1])) || \
-	(str.length() > 1 && isdigit(str[0])))
+	else if (isInt(str))
 		convertInt(str);
 	else
-		throw ImpossibleException();
+		all_impossible();
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: leegichan <leegichan@student.42.fr>        +#+  +:+       +#+         #
+#    By: gichlee <gichlee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/27 20:43:56 by gichlee           #+#    #+#              #
-#    Updated: 2024/01/15 21:48:08 by leegichan        ###   ########.fr        #
+#    Updated: 2024/01/23 19:59:01 by gichlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS		=	main.cpp \
 
 OBJS		= $(SRCS:%.cpp=%.o)
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
-CXXFLAGS	+= -g3
+# CXXFLAGS	+= -g3
 
 RM			+= -f
 %.o: %.cpp
