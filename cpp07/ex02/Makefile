@@ -12,10 +12,8 @@
 
 NAME		= a.out
 SRCS		=	main.cpp \
-				Array.tpp
 
 OBJS		= $(SRCS:%.cpp=%.o)
-# OBJS		+= $(SRCS:%.tpp=%.o)
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 # CXXFLAGS	+= -g3
 

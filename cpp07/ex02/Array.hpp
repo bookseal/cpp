@@ -7,8 +7,8 @@ template <typename T>
 class Array
 {
 	private:
-		T*		_array;
 		size_t	_size;
+		T*		_array;
 	public:
 		Array(void);
 		Array(unsigned int n);
@@ -16,7 +16,17 @@ class Array
 		~Array(void);
 		Array & operator=(Array const & rhs);
 
-		int size(T const &array);
+		T & operator[](unsigned int i);
+
+		size_t	size(void) const;
+
+		class OutOfLimitsException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
 };
+
+#include "Array.tpp"
 
 #endif
