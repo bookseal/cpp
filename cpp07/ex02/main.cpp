@@ -13,6 +13,26 @@ void pause(std::string msg)
 int	main(void)
 {
 	{
+		pause("Testing: Empty Array<int>");
+		Array<int> a;
+		std::cout << "a.size(): " << a.size() << std::endl;
+
+	}
+	{
+		pause("Testing: const Array<int>");
+		Array<int> const a(5);
+		std::cout << "a.size(): " << a.size() << std::endl;
+
+		try
+		{
+			std::cout << "a[5]: " << a[5] << std::endl;
+		}
+		catch (std::exception & e)
+		{
+			std::cout << "a[5]: " << e.what() << std::endl;
+		}
+	}
+	{
 		pause("Testing: Array<int>");
 		Array<int> a(5);
 		Array<int> b(5);
@@ -108,5 +128,6 @@ int	main(void)
 			std::cout << b[i] << " ";
 		std::cout << std::endl;
 	}
+
 	return (0);
 }

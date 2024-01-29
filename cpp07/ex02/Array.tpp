@@ -42,6 +42,14 @@ T & Array<T>::operator[](unsigned int i)
 }
 
 template <typename T>
+T const & Array<T>::operator[](unsigned int i) const
+{
+	if (i >= _size)
+		throw std::exception();
+	return (_array[i]);
+}
+
+template <typename T>
 size_t Array<T>::size(void) const
 {
     return (_size);
