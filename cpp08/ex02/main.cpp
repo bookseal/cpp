@@ -35,7 +35,6 @@ int	main(void)
 			std::cout << *it << std::endl;
 			++it;
 		}
-		std::stack<int> s(mstack);
 	}
 
 	pause("Testing with a list of ints");
@@ -59,7 +58,6 @@ int	main(void)
 			std::cout << *itl << std::endl;
 			++itl;
 		}
-		std::list<int> sl(l);
 	}
 
 	return (0);

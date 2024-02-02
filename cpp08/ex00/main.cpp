@@ -24,11 +24,11 @@ int main(void)
 		try {
 			std::cout << "Found " << *(easyfind(v, 5)) << std::endl;
 		}
-		catch (std::exception &e) { std::cout << "Not found" << std::endl;}
+		catch (std::exception &e) { std::cout << "Error: Not found" << std::endl;}
 		try {
 			std::cout << "Found " << *(easyfind(v, 10)) << std::endl;
 		}
-		catch (std::exception &e) { std::cout << "Not found" << std::endl;
+		catch (std::exception &e) { std::cout << "Error: Not found" << std::endl;
 		}
 	}
 
@@ -41,12 +41,21 @@ int main(void)
 		try {
 			std::cout << "Found " << *(easyfind(l, 5)) << std::endl;
 		}
-		catch (std::exception &e) { std::cout << "Not found" << std::endl;}
+		catch (std::exception &e) { std::cout << "Error: Not found" << std::endl;}
 		try {
 			std::cout << "Found " << *(easyfind(l, 10)) << std::endl;
 		}
-		catch (std::exception &e) { std::cout << "Not found" << std::endl;
+		catch (std::exception &e) { std::cout << "Error: Not found" << std::endl;
 		}
+	}
+
+	pause("Tesing with a const vector of ints");
+	{
+		const std::vector<int> v;
+		try {
+			std::cout << "Found " << *(easyfind(v, 5)) << std::endl;
+		}
+		catch (std::exception &e) { std::cout << "Error: Not found" << std::endl;}
 	}
 	return (0);
 }
