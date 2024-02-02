@@ -70,20 +70,28 @@ void BitcoinExchange::calculateInput(std::string inputFile, std::map<std::string
 
 
 void BitcoinExchange::checkValidDate(std::string date) {
-    if (date.length() != 10) {
-        throw std::invalid_argument("Invalid date format");
+    std::regex datePattern(R"(\d{4}-\d{2}-\d{2})");
+    if (!std::regex_match(date, datePattern)) {
+        throw std::invalid_argument("Invalid date format. Required format: YYYY-MM-DD.");
     }
-    if (date[4] != '-' || date[7] != '-') {
-        throw std::invalid_argument("Invalid date format");
-    }
-    for (int i = 0; i < 10; i++) {
-        if (i == 4 || i == 7) {
-            continue;
+    std::tm time = {};
+    std::istringstream ss(date);
+    ss >> std::get_time(&time, "%Y-%m-%d");
+    if (!ss.fail()) {
+        int year = time.tm_year + 1900; // tm_year is years since 1900
+        int month = time.tm_mon + 1; // tm_mon is months since January [0-11]
+        if (month == 2) {
+            bool isLeapYear = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+            int maxDays = isLeapYear ? 29 : 28;
+            if (time.tm_mday > maxDays) {
+                throw std::invalid_argument("Invalid date: February in this year only has " + std::to_string(maxDays) + " days.");
+            }
         }
-        if (date[i] < '0' || date[i] > '9') {
-            throw std::invalid_argument("Invalid date format");
-        }
+    } else {
+        throw std::invalid_argument("Failed to parse date.");
     }
+  
+
 }
 
 void BitcoinExchange::checkValidAmount(double amount) {
