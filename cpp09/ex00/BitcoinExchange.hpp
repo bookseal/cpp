@@ -17,12 +17,11 @@ class BitcoinExchange {
         
         void run(std::string inputFile);
         std::map<std::string, double> convertCSVtoPriceList(std::string filename);
-        void printPriceList(const std::map<std::string, double> &priceList);
         void calculateInput(std::string inputFile, std::map<std::string, double> priceList);
         void checkValidDate(std::string date);
         void checkValidAmount(double amount);
         void printResult(std::string date, double amount, double total);
-
+		double findPrice(std::string date, std::map<std::string, double> priceList);
 };
 
 #endif
