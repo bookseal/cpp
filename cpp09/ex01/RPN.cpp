@@ -70,6 +70,8 @@ void RPN::mul() {
 
 void RPN::div() {
     int a = stack->top();
+    if (a == 0)
+        throw std::exception();
     stack->pop();
     int b = stack->top();
     stack->pop();

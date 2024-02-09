@@ -16,7 +16,7 @@ SRCS		=	main.cpp \
 
 OBJS		= $(SRCS:%.cpp=%.o)
 CXXFLAGS	= -Wall -Wextra -Werror
- CXXFLAGS	+= -g3
+# CXXFLAGS	+= -g3
 
 RM			+= -f
 %.o: %.cpp
