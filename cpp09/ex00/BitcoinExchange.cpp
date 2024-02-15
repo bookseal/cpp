@@ -9,9 +9,7 @@ BitcoinExchange::BitcoinExchange(BitcoinExchange const &src) {
 }
 
 BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &rhs) {
-	if (this != &rhs) {
-		// Do whatever
-	}
+	(void)rhs;
 	return *this;
 }
 
@@ -38,12 +36,12 @@ std::map<std::string, double> BitcoinExchange::convertCSVtoPriceList(std::string
 }
 
 void BitcoinExchange::calculateInput(std::string inputFile, std::map<std::string, double> priceList) {
-	std::ifstream file(inputFile);
+	std::ifstream iInput(inputFile);
 	std::string line, date;
 	double amount, price = 0;
 
-	std::getline(file, line);
-	while (std::getline(file, line)) {
+	handle_fist_line(iInput);
+	while (std::getline(iInput, line)) {
 		std::istringstream ss(line);
 		std::getline(ss, date, '|');
 		try {
@@ -59,6 +57,15 @@ void BitcoinExchange::calculateInput(std::string inputFile, std::map<std::string
 		}
 		price = findPrice(date, priceList);
 		printResult(date, amount, price);
+	}
+}
+
+void BitcoinExchange::handle_fist_line(std::ifstream &iInput) {
+	std::string line;
+	std::getline(iInput, line);
+	if (line != "date | value") {
+		std::cout << "Error: Invalid file format." << std::endl;
+		exit(1);
 	}
 }
 
@@ -79,7 +86,7 @@ void BitcoinExchange::checkValidDate(std::string date) {
 	if (ss.peek() != '-') {
 		throw std::invalid_argument("bad input => " + date);
 	}
-	ss.ignore();
+	ss.ignore(); // skip '-'
 	ss >> month;
 	if (ss.peek() != '-') {
 		throw std::invalid_argument("bad input => " + date);
@@ -111,7 +118,7 @@ void BitcoinExchange::checkValidDate(std::string date) {
 
 void BitcoinExchange::checkValidAmount(double amount)
 {
-	if (amount <= 0)
+	if (amount < 0)
 		throw std::invalid_argument("not a positive number.");
 	if (amount > 1000)
 		throw std::invalid_argument("too large a number.");
