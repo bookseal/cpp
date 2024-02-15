@@ -6,7 +6,7 @@
 #    By: gichlee <gichlee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/27 20:43:56 by gichlee           #+#    #+#              #
-#    Updated: 2024/01/26 18:00:08 by gichlee          ###   ########.fr        #
+#    Updated: 2024/02/15 14:04:06 by gichlee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRCS		=	main.cpp \
 				RPN.cpp
 
 OBJS		= $(SRCS:%.cpp=%.o)
-CXXFLAGS	= -Wall -Wextra -Werror
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 # CXXFLAGS	+= -g3
 
 RM			+= -f
