@@ -45,6 +45,8 @@ void RPN::add() {
 	stack->pop();
 	int b = stack->top();
 	stack->pop();
+	// FIXME:
+	// checkValidNum()
 	stack->push(a + b);
 }
 
@@ -53,6 +55,8 @@ void RPN::sub() {
 	stack->pop();
 	int b = stack->top();
 	stack->pop();
+	// FIXME:
+	// checkValidNum()
 	stack->push(b - a);
 }
 
@@ -61,6 +65,8 @@ void RPN::mul() {
 	stack->pop();
 	int b = stack->top();
 	stack->pop();
+	// FIXME:
+	// checkValidNum()
 	stack->push(a * b);
 }
 
@@ -71,6 +77,8 @@ void RPN::div() {
 	stack->pop();
 	int b = stack->top();
 	stack->pop();
+	// FIXME:
+	// checkValidNum()
 	stack->push(b / a);
 }
 

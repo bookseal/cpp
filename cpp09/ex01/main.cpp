@@ -26,7 +26,12 @@ int main(int argc, char **argv) {
 			} else if (rpn.hasTokenBracket(token) || rpn.hasTokenDicimalNumbers(token)) {
 				throw std::runtime_error("Error");
 			} else {
-				rpn.push(std::atoi(token.c_str()));
+				int num = std::atoi(token.c_str());
+				if (num == 0 && token != "0")
+					throw std::runtime_error("Error");
+				if (num > 9)
+					throw std::runtime_error("Error");
+				rpn.push(num);
 			}
 		}
 		rpn.print();

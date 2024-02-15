@@ -15,6 +15,7 @@ BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &rhs) {
 
 void BitcoinExchange::run(std::string inputFile) {
 	std::string data = "data.csv";
+	// FIXME: check if file exists
 	std::map<std::string, double> priceList = convertCSVtoPriceList(data);
 	calculateInput(inputFile, priceList);
 };
@@ -82,6 +83,7 @@ void BitcoinExchange::checkValidDate(std::string date) {
 	std::istringstream ss(date);
 	int year, month, day;
 
+	// FIXME: check if string date has more than 4 + 1 + 2 + 1 + 2 characters
 	ss >> year;
 	if (ss.peek() != '-') {
 		throw std::invalid_argument("bad input => " + date);
