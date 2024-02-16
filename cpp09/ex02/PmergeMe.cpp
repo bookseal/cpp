@@ -88,7 +88,6 @@ void PmergeMe::strToVec(const std::string &s) {
 	std::cout << std::endl;
 }
 
-
 void PmergeMe::mergeInsertSort() {
 	devideAndCreateMainAndSub(vOrigin);
 	subToMain();
@@ -294,7 +293,7 @@ void PmergeMe::printAfter() {
 void PmergeMe::printTime() {
 	std::cout << "Time to process a range of " << pMain.size() << " elements: ";
 	std::cout << "with std::vector : ";
-	std::cout << endTimeVec - startTimeVec << " us" << std::endl;
+    std::cout << endTimeVec - startTimeVec << " us" << std::endl;
 
 	std::cout << "Time to process a range of " << dMain.size() << " elements: ";
 	std::cout << "with std::deque  : ";
@@ -307,7 +306,7 @@ void PmergeMe::recordStartTime() {
 	gettimeofday(&tv, NULL);
 	long seconds = tv.tv_sec;
 	long microSeconds = tv.tv_usec;
-	startTimeVec = seconds + microSeconds * 1e-6;
+	startTimeVec = seconds * 1e6 + microSeconds;
 }
 
 void PmergeMe::recordEndTime() {
@@ -315,7 +314,7 @@ void PmergeMe::recordEndTime() {
 	gettimeofday(&tv, NULL);
 	long seconds = tv.tv_sec;
 	long microSeconds = tv.tv_usec;
-	endTimeVec = seconds + microSeconds * 1e-6;
+	endTimeVec = seconds * 1e6 + microSeconds;
 }
 
 // Deque
@@ -537,7 +536,7 @@ void PmergeMe::recordStartTimeD() {
 	gettimeofday(&tv, NULL);
 	long seconds = tv.tv_sec;
 	long microSeconds = tv.tv_usec;
-	startTimeDeque = seconds + microSeconds * 1e-6;
+	startTimeDeque = seconds * 1e6 + microSeconds;
 }
 
 void PmergeMe::recordEndTimeD() {
@@ -545,5 +544,5 @@ void PmergeMe::recordEndTimeD() {
 	gettimeofday(&tv, NULL);
 	long seconds = tv.tv_sec;
 	long microSeconds = tv.tv_usec;
-	endTimeDeque = seconds + microSeconds * 1e-6;
+	endTimeDeque = seconds * 1e6 + microSeconds;
 }
