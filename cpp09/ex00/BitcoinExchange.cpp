@@ -15,7 +15,7 @@ BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &rhs) {
 
 void BitcoinExchange::run(std::string inputFile) {
 	std::string data = "data.csv";
-	// FIXME: check if file exists
+
 	std::map<std::string, double> priceList = convertCSVtoPriceList(data);
 	calculateInput(inputFile, priceList);
 };
@@ -23,6 +23,10 @@ void BitcoinExchange::run(std::string inputFile) {
 std::map<std::string, double> BitcoinExchange::convertCSVtoPriceList(std::string filename) {
 	std::map<std::string, double> priceList;
 	std::ifstream file(filename);
+    if (!file.is_open()) {
+        std::cout << "Error: could not open file." << std::endl;
+        exit(1);
+    }
 	std::string line, date;
 	double price;
 
@@ -79,12 +83,28 @@ double BitcoinExchange::findPrice(std::string date, std::map<std::string, double
 	return it->second;
 }
 
-void BitcoinExchange::checkValidDate(std::string date) {
-	std::istringstream ss(date);
-	int year, month, day;
+void BitcoinExchange::isFormatValid(std::string date) {
+    if (date.length() != 11) {
+        throw std::invalid_argument("bad input => " + date);
+    }
+    for (size_t i = 0; i < date.length() - 1; i++) {
+        if (i == 4 || i == 7) {
+            if (date[i] != '-') {
+                throw std::invalid_argument("bad input => " + date);
+            }
+        }
+        else if (!isdigit(date[i])) {
+            throw std::invalid_argument("bad input => " + date);
+        }
+    }
+}
 
-	// FIXME: check if string date has more than 4 + 1 + 2 + 1 + 2 characters
-	ss >> year;
+void BitcoinExchange::checkValidDate(std::string date) {
+    isFormatValid(date);
+
+    std::istringstream ss(date);
+    int year, month, day;
+    ss >> year;
 	if (ss.peek() != '-') {
 		throw std::invalid_argument("bad input => " + date);
 	}

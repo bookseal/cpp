@@ -27,9 +27,11 @@ int main(int argc, char **argv) {
 				throw std::runtime_error("Error");
 			} else {
 				int num = std::atoi(token.c_str());
-				if (num == 0 && token != "0")
+                if (num == 0 && token == "-0")
+                    ;
+				else if (num == 0 && token != "0")
 					throw std::runtime_error("Error");
-				if (num > 9)
+                if (num > 9)
 					throw std::runtime_error("Error");
 				rpn.push(num);
 			}

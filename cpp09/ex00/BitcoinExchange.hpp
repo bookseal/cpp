@@ -23,6 +23,7 @@ class BitcoinExchange {
         void printResult(std::string date, double amount, double total);
 		double findPrice(std::string date, std::map<std::string, double> priceList);
 		void handle_fist_line(std::ifstream &iInput);
+        void isFormatValid(std::string date);
 };
 
 #endif
