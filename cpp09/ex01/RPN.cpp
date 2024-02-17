@@ -45,9 +45,9 @@ void RPN::add() {
 	stack->pop();
 	int b = stack->top();
 	stack->pop();
-    int sum = a + b;
-    if (sum - b != a || sum - a != b)
-        throw std::runtime_error("Error: Overflow");
+	int sum = a + b;
+	if (sum - b != a || sum - a != b)
+		throw std::runtime_error("Error: Overflow");
 	stack->push(a + b);
 }
 
@@ -56,9 +56,9 @@ void RPN::sub() {
 	stack->pop();
 	int b = stack->top();
 	stack->pop();
-    int diff = b - a;
-    if (diff + a != b || diff - b != -a)
-        throw std::runtime_error("Error: Overflow");
+	int diff = b - a;
+	if (diff + a != b || diff - b != -a)
+		throw std::runtime_error("Error: Overflow");
 	stack->push(b - a);
 }
 
@@ -67,24 +67,24 @@ void RPN::mul() {
 	stack->pop();
 	int b = stack->top();
 	stack->pop();
-    int mul = a * b;
-    if (a != 0 && mul / a != b)
-        throw std::runtime_error("Error: Overflow");
-    if (b != 0 && mul / b != a)
-        throw std::runtime_error("Error: Overflow");
+	int mul = a * b;
+	if (a != 0 && mul / a != b)
+		throw std::runtime_error("Error: Overflow");
+	if (b != 0 && mul / b != a)
+		throw std::runtime_error("Error: Overflow");
 	stack->push(a * b);
 }
 
 void RPN::div() {
 	int a = stack->top();
 	stack->pop();
-    int b = stack->top();
-    stack->pop();
-    if (a == 0)
-        throw std::runtime_error("Error: Division by zero");
-    int div = b / a;
-    if (a != 0 && div * a != b)
-        throw std::runtime_error("Error: Overflow");
+	int b = stack->top();
+	stack->pop();
+	if (a == 0)
+		throw std::runtime_error("Error: Division by zero");
+	int div = b / a;
+	if (a != 0 && div * a != b)
+		throw std::runtime_error("Error: Overflow");
 	stack->push(b / a);
 }
 
