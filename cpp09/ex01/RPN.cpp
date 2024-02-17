@@ -41,8 +41,12 @@ int RPN::size() const {
 }
 
 void RPN::add() {
+	if (stack->empty())
+		throw std::runtime_error("Error: Stack is empty");
 	int a = stack->top();
 	stack->pop();
+	if (stack->empty())
+		throw std::runtime_error("Error: Stack is empty");
 	int b = stack->top();
 	stack->pop();
 	int sum = a + b;
@@ -52,8 +56,12 @@ void RPN::add() {
 }
 
 void RPN::sub() {
+	if (stack->empty())
+		throw std::runtime_error("Error: Stack is empty");
 	int a = stack->top();
 	stack->pop();
+	if (stack->empty())
+		throw std::runtime_error("Error: Stack is empty");
 	int b = stack->top();
 	stack->pop();
 	int diff = b - a;
@@ -63,8 +71,12 @@ void RPN::sub() {
 }
 
 void RPN::mul() {
+	if (stack->empty())
+		throw std::runtime_error("Error: Stack is empty");
 	int a = stack->top();
 	stack->pop();
+	if (stack->empty())
+		throw std::runtime_error("Error: Stack is empty");
 	int b = stack->top();
 	stack->pop();
 	int mul = a * b;
@@ -76,8 +88,12 @@ void RPN::mul() {
 }
 
 void RPN::div() {
+	if (stack->empty())
+		throw std::runtime_error("Error: Stack is empty");
 	int a = stack->top();
 	stack->pop();
+	if (stack->empty())
+		throw std::runtime_error("Error: Stack is empty");
 	int b = stack->top();
 	stack->pop();
 	if (a == 0)
