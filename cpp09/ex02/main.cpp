@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
 	p.strToDeq(s);
 	p.mergeInsertSortD();
 	p.recordEndTimeD();
-
+	
 	p.printAfter();
 	p.printTime();
 

@@ -51,9 +51,9 @@ class PmergeMe {
 		void updateIdxOfMainAndSub();
 		void printMainSub();
 		void insertToMainAndSub(int mainNum, int subNum);
-		void subToMain();
-		void insertSubToMain();
-		void insertFirstOfSubToMain();
+		void sortMainRecursive();
+		void insertToMain();
+		void insertFirstOfsortMain();
 		size_t  getElementSameIdxAsNum(size_t i);
 
 		void recordStartTimeD();
@@ -72,9 +72,10 @@ class PmergeMe {
 		void updateIdxOfMainAndSubD();
 		void printMainSubD();
 		void insertToMainAndSubD(int mainNum, int subNum);
-		void subToMainD();
-		void insertSubToMainD();
-		void insertFirstOfSubToMainD();
+		void sortMainRecursiveD();
+		void insertToMainD();
+		void insertFirstOfsortMainD();
 		size_t  getElementSameIdxAsNumD(size_t i);
+		bool isNumber(const char* str);
 };
 #endif

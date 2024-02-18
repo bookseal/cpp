@@ -26,17 +26,35 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other) {
 	return *this;
 }
 
+bool PmergeMe::isNumber(const char* str) {
+	for (int i = 0; str[i] != '\0'; ++i) {
+		if (str[i] < '0' || str[i] > '9') {
+			return false;
+		}
+	}
+	return true;
+}
+
 std::string PmergeMe::printBefore(int argc, char **argv) {
 	std::string s;
-	std::cout << "Before:  ";
+	std::vector <int> v;
+
 	for (int i = 1; i < argc; i++) {
-		if (atoi(argv[i]) < 0) {
-			std::cerr << "Error: " << argv[i] << " is a negative number" << std::endl;
+		if (!isNumber(argv[i])){
+			std::cerr << "Error: " << argv[i] << " is not a integer number" << std::endl;
 			exit(1);
 		}
-		std::cout << std::setw(5) << argv[i] << " ";
+		if (atoi(argv[i]) <= 0) {
+			std::cerr << "Error: " << argv[i] << " must be a positive integer" << std::endl;
+			exit(1);
+		}
+		v.push_back(atoi(argv[i]));
 		s += argv[i];
 		s += " ";
+	}
+	std::cout << "Before:  ";
+	for (size_t i = 0; i < v.size(); i++) {
+		std::cout << std::setw(5) << v[i] << " ";
 	}
 	return s;
 }
@@ -90,8 +108,8 @@ void PmergeMe::strToVec(const std::string &s) {
 
 void PmergeMe::mergeInsertSort() {
 	devideAndCreateMainAndSub(vOrigin);
-	subToMain();
-	insertSubToMain();
+	sortMainRecursive();
+	insertToMain();
 	if (numLeft != -1) {
 		binarySearchInsertionForLeft();
 	}
@@ -117,8 +135,8 @@ size_t  PmergeMe::binarySearchForLeft() {
 	return left;
 }
 
-void PmergeMe::insertSubToMain() {
-	insertFirstOfSubToMain();
+void PmergeMe::insertToMain() {
+	insertFirstOfsortMain();
 	std::vector<int> vInsertionOrder = getInsertionOrder();
 	for (size_t i = 0; i < vInsertionOrder.size(); i++) {
 		for (int j = vInsertionOrder[i]; j > 0; j--) {
@@ -130,7 +148,7 @@ void PmergeMe::insertSubToMain() {
 	}
 }
 
-void PmergeMe::insertFirstOfSubToMain() {
+void PmergeMe::insertFirstOfsortMain() {
 	if (pSub.empty()) {
 		return;
 	}
@@ -138,7 +156,7 @@ void PmergeMe::insertFirstOfSubToMain() {
 	pSub.erase(pSub.begin());
 }
 
-void PmergeMe::subToMain() {
+void PmergeMe::sortMainRecursive() {
 	for (size_t i = 0; i < pMain.size(); i++) {
 		pMain[i].second = i;
 		pSub[i].second = i;
@@ -293,7 +311,7 @@ void PmergeMe::printAfter() {
 void PmergeMe::printTime() {
 	std::cout << "Time to process a range of " << pMain.size() << " elements: ";
 	std::cout << "with std::vector : ";
-    std::cout << endTimeVec - startTimeVec << " us" << std::endl;
+	std::cout << endTimeVec - startTimeVec << " us" << std::endl;
 
 	std::cout << "Time to process a range of " << dMain.size() << " elements: ";
 	std::cout << "with std::deque  : ";
@@ -339,8 +357,8 @@ void PmergeMe::strToDeq(const std::string &s) {
 
 void PmergeMe::mergeInsertSortD() {
 	devideAndCreateMainAndSubD(dOrigin);
-	subToMainD();
-	insertSubToMainD();
+	sortMainRecursiveD();
+	insertToMainD();
 	if (numLeft != -1) {
 		binarySearchInsertionForLeftD();
 	}
@@ -366,8 +384,8 @@ size_t  PmergeMe::binarySearchForLeftD() {
 	return left;
 }
 
-void PmergeMe::insertSubToMainD() {
-	insertFirstOfSubToMainD();
+void PmergeMe::insertToMainD() {
+	insertFirstOfsortMainD();
 	std::deque<int> dInsertionOrder = getInsertionOrderD();
 	for (size_t i = 0; i < dInsertionOrder.size(); i++) {
 		for (int j = dInsertionOrder[i]; j > 0; j--) {
@@ -379,7 +397,7 @@ void PmergeMe::insertSubToMainD() {
 	}
 }
 
-void PmergeMe::insertFirstOfSubToMainD() {
+void PmergeMe::insertFirstOfsortMainD() {
 	if (dSub.empty()) {
 		return;
 	}
@@ -387,7 +405,7 @@ void PmergeMe::insertFirstOfSubToMainD() {
 	dSub.erase(dSub.begin());
 }
 
-void PmergeMe::subToMainD() {
+void PmergeMe::sortMainRecursiveD() {
 	for (size_t i = 0; i < dMain.size(); i++) {
 		dMain[i].second = i;
 		dSub[i].second = i;
