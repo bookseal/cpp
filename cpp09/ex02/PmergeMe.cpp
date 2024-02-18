@@ -40,12 +40,8 @@ std::string PmergeMe::printBefore(int argc, char **argv) {
 	std::vector <int> v;
 
 	for (int i = 1; i < argc; i++) {
-		if (!isNumber(argv[i])){
+		if (strlen(argv[i]) > 10 || !isNumber(argv[i]) || atoi(argv[i]) <= 0){
 			std::cerr << "Error: " << argv[i] << " is not a integer number" << std::endl;
-			exit(1);
-		}
-		if (atoi(argv[i]) <= 0) {
-			std::cerr << "Error: " << argv[i] << " must be a positive integer" << std::endl;
 			exit(1);
 		}
 		v.push_back(atoi(argv[i]));
@@ -56,35 +52,8 @@ std::string PmergeMe::printBefore(int argc, char **argv) {
 	for (size_t i = 0; i < v.size(); i++) {
 		std::cout << std::setw(5) << v[i] << " ";
 	}
+	std::cout << std::endl;
 	return s;
-}
-
-void PmergeMe::printMainSub() {
-	std::cout << "Main First  : ";
-	for (size_t i = 0; i < pMain.size(); i++) {
-		std::cout << pMain[i].first << " ";
-	}
-	std::cout << std::endl;
-
-	std::cout << "Main Second :";
-	for (size_t i = 0; i < pMain.size(); i++) {
-		std::cout << pMain[i].second << " ";
-	}
-	std::cout << std::endl;
-
-	std::cout << "Sub First   : ";
-	for (size_t i = 0; i < pSub.size(); i++) {
-		std::cout << pSub[i].first << " ";
-	}
-	std::cout << std::endl;
-
-	std::cout << "Sub Second  :";
-	for (size_t i = 0; i < pSub.size(); i++) {
-		std::cout << pSub[i].second << " ";
-	}
-
-	std::cout << std::endl;
-	std::cout << std::endl;
 }
 
 // Vector
@@ -103,7 +72,6 @@ void PmergeMe::strToVec(const std::string &s) {
 		}
 		vOrigin.push_back(n);
 	}
-	std::cout << std::endl;
 }
 
 void PmergeMe::mergeInsertSort() {
@@ -351,7 +319,6 @@ void PmergeMe::strToDeq(const std::string &s) {
 		}
 		dOrigin.push_back(n);
 	}
-	std::cout << std::endl;
 }
 
 

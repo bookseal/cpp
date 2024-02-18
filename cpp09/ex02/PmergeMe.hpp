@@ -49,7 +49,6 @@ class PmergeMe {
 		void pMainSort(std::vector<std::pair<int, size_t> > &p, int left, int right);
 		void syncMainSub();
 		void updateIdxOfMainAndSub();
-		void printMainSub();
 		void insertToMainAndSub(int mainNum, int subNum);
 		void sortMainRecursive();
 		void insertToMain();
