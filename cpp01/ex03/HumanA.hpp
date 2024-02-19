@@ -10,7 +10,12 @@ public:
 	~HumanA();
 	void	attack(void);
 private:
+    // TODO: They both have a Weapon and a name.
 	std::string name;
+    // Weapon weapon;
+    // Weapon *weapon;
+    // Weapon &weapon;
+    // 고민해야돼. 차이점을 알고
 	Weapon &weapon;
 };
 
