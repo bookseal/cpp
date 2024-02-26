@@ -4,6 +4,15 @@
 
 int main(){
 	{
+        // TODO: 변수를 선언한다.
+        // Data type: Weapon
+        // Variable name: club
+        // Value: Weapon("crude spiked club")
+//        t_info info;
+//        Weapon club1;
+        // Default Constructor
+        Weapon club0 = Weapon();
+        // Parameterized Constructor
 		Weapon  club = Weapon("crude spiked club");
 		HumanA bob("Bob", club);
 		bob.attack();

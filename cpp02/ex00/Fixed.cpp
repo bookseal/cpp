@@ -10,11 +10,14 @@ Fixed::Fixed(const Fixed &src)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	// (*this).operator=(src);
+    // '=' means that it is an assignment operator
+    // 'operator=' means that it is an assignment operator
 	*this = src;
 }
 
 Fixed &Fixed::operator=(const Fixed &rhs)
 {
+    // 헷갈리는 게 정상
 	std::cout << "Copy Assignment operator called" << std::endl;
 	this->_fixedPointValue = rhs.getRawBits();
 	return (*this);
